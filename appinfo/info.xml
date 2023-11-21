@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<info xmlns:xsi= "http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
+    <!--
+    SPDX-FileCopyrightText: Hamza Mahjoubi <hamzamahjoubi22@proton.me>
+    SPDX-License-Identifier: CC0-1.0
+    -->
+    <id>files_emailviewer</id>
+    <name>Email Viewer</name>
+    <summary>View the contents of an .eml or .msg file</summary>
+    <description><![CDATA[This application integrates the [email-to-pdf-converter](https://github.com/nickrussler/email-to-pdf-converter) into Nextcloud. Using this application users can view their eml or .msg file files in the mail app without the need to download the file.]]></description>
+    <version>0.1.0</version>
+    <licence>agpl</licence>
+    <author mail="hamzamahjoubi22@proton.me">Hamza Mahjoubi</author>
+    <namespace>Files_EmailViewer</namespace>
+    <category>tools</category>
+    <bugs>https://github.com/nextcloud/files_emailviewer/issues</bugs>
+    <dependencies>
+        <nextcloud min-version="28" max-version="29"/>
+    </dependencies>
+</info>
