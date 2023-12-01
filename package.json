@@ -1,0 +1,38 @@
+{
+  "name": "files_emailviewer",
+  "description": "Email viewer plugin for Nextcloud",
+  "version": "0.1.0",
+  "bugs": {
+    "url": "https://github.com/nextcloud/files_emailviewer/issues"
+  },
+  "repository": {
+    "url": "https://github.com/nextcloud/files_emailviewer",
+    "type": "git"
+  },
+  "homepage": "https://github.com/nextcloud/files_emailviewer",
+  "license": "AGPL-3.0-or-later",
+  "private": true,
+  "scripts": {
+    "build": "webpack --node-env production --progress",
+    "dev": "webpack --node-env development --progress",
+    "watch": "webpack --node-env development --progress --watch",
+    "lint": "eslint --ext .js,.vue src",
+    "lint:fix": "eslint --ext .js,.vue src --fix"
+  },
+  "dependencies": {
+    "@nextcloud/router": "^2.2.0"
+  },
+  "browserslist": [
+    "extends @nextcloud/browserslist-config"
+  ],
+  "engines": {
+    "node": "^16.0.0",
+    "npm": "^7.0.0 || ^8.0.0"
+  },
+  "devDependencies": {
+    "@nextcloud/babel-config": "^1.0.0",
+    "@nextcloud/browserslist-config": "^3.0.0",
+    "@nextcloud/eslint-config": "^8.3.0",
+    "@nextcloud/webpack-vue-config": "^6.0.0"
+  }
+}

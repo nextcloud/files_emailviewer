@@ -1,0 +1,35 @@
+{
+	"name": "nextcloud/emailviewer",
+	"description": "View the contents of an .eml or .msg file",
+	"type": "project",
+	"license": "AGPL-3.0-or-later",
+	"authors": [
+		{
+			"name": "Hamza Mahjoubi"
+		}
+	],
+	"require-dev": {
+		"nextcloud/coding-standard": "^v1.1.1",
+		"nextcloud/ocp": "dev-stable28",
+		"psalm/phar": "^5.15.0"
+	},
+	"scripts": {
+		"lint": "find . -name \\*.php -not -path './vendor/*' -print0 | xargs -0 -n1 php -l",
+		"cs:check": "php-cs-fixer fix --dry-run --diff",
+		"cs:fix": "php-cs-fixer fix",
+		"psalm": "psalm.phar --threads=1",
+		"psalm:update-baseline": "psalm.phar --threads=1 --update-baseline",
+		"psalm:update-baseline:force": "psalm.phar --threads=1 --update-baseline --set-baseline=tests/psalm-baseline.xml",
+		"psalm:clear": "psalm.phar --clear-cache && psalm --clear-global-cache",
+		"psalm:fix": "psalm.phar --alter --issues=InvalidReturnType,InvalidNullableReturnType,MissingParamType,InvalidFalsableReturnType"
+	},
+	"config": {
+		"sort-packages": true,
+		"allow-plugins": {
+			"composer/package-versions-deprecated": true
+		},
+		"platform": {
+			"php": "8.0"
+		}
+	}
+}
