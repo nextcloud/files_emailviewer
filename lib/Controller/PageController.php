@@ -34,7 +34,11 @@ class PageController extends Controller {
 	 * @NoCSRFRequired
 	 * @return StreamResponse|DataResponse
 	 */
-	public function convert(string $fileId) {
+	public function convert(int $fileId) {
+		if ($this->userId === null) {
+			return new DataResponse([], Http::STATUS_BAD_REQUEST);
+		}
+
 		$userFolder = $this->root->getUserFolder($this->userId);
 		$nodes = $userFolder->getById($fileId);
 
@@ -42,11 +46,15 @@ class PageController extends Controller {
 			return new DataResponse([], Http::STATUS_NOT_FOUND);
 		}
 
-		/** @var \OCP\Files\Node $fileInfo */
-		$fileInfo = array_pop($nodes);
+		$node = array_pop($nodes);
+		if (!$node instanceof \OCP\Files\File) {
+			return new DataResponse([], Http::STATUS_NOT_FOUND);
+		}
 
-		$storage = $fileInfo->getStorage();
-		$path = $storage->getLocalFile($fileInfo->getInternalPath());
+		$path = $node->getStorage()->getLocalFile($node->getInternalPath());
+		if ($path === false) {
+			return new DataResponse([], Http::STATUS_NOT_FOUND);
+		}
 
 		try {
 			$resultPath = $this->conversionService->convert($path);

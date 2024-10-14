@@ -69,7 +69,7 @@ class ConversionService {
 		return $resultPath;
 	}
 
-	private function checkRequirements() {
+	private function checkRequirements(): void {
 		$disableFunctions = ini_get('disable_functions');
 		if ($disableFunctions !== false && str_contains($disableFunctions, 'proc_open')) {
 			throw new ConversionException('proc_open is disabled');
