@@ -16,7 +16,7 @@ class ConversionException extends Exception {
 	 * @param mixed $code [optional] The Exception code.
 	 * @param null|Throwable $previous [optional] The previous throwable used for the exception chaining.
 	 */
-	public function __construct($message = '', $code = 0, Throwable $previous = null) {
+	public function __construct($message = '', $code = 0, ?Throwable $previous = null) {
 		if (!is_int($code)) {
 			$code = (int)$code;
 		}

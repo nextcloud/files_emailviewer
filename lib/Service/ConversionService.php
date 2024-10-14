@@ -17,8 +17,8 @@ class ConversionService {
 	private string $binaryPath;
 
 	public function __construct(
-		private IConfig         $config,
-		private ITempManager    $tempManager
+		private IConfig $config,
+		private ITempManager $tempManager,
 	) {
 		$this->binaryPath = $this->config->getAppValue(Application::APP_ID, 'binary_path', '');
 	}
@@ -46,7 +46,7 @@ class ConversionService {
 		];
 
 		$process = proc_open($command, $descriptors, $pipes);
-		if($process === false) {
+		if ($process === false) {
 			throw new ConversionException('Could not invoke emailconverter.jar');
 		}
 
