@@ -20,11 +20,11 @@ use Psr\Log\LoggerInterface;
 
 class PageController extends Controller {
 	public function __construct(
-		IRequest                  $request,
-		private IRootFolder          $root,
-		private ?string           $userId,
+		IRequest $request,
+		private IRootFolder $root,
+		private ?string $userId,
 		private ConversionService $conversionService,
-		private LoggerInterface $logger
+		private LoggerInterface $logger,
 	) {
 		parent::__construct(Application::APP_ID, $request);
 	}
