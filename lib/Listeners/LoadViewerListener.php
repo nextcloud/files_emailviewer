@@ -2,8 +2,10 @@
 
 declare(strict_types=1);
 
-// SPDX-FileCopyrightText: Daniel Kesselberg <mail@danielkesselberg.de>
-// SPDX-License-Identifier: AGPL-3.0-or-later
+/**
+ * SPDX-FileCopyrightText: 2024 Daniel Kesselberg <mail@danielkesselberg.de>
+ * SPDX-License-Identifier: AGPL-3.0-or-later
+ */
 
 namespace OCA\Files_EmailViewer\Listeners;
 
