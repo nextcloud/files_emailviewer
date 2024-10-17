@@ -18,7 +18,8 @@
 		"cs:fix": "vendor-bin/cs-fixer/vendor/bin/php-cs-fixer fix",
 		"psalm": "vendor-bin/psalm/vendor/bin/psalm --threads=1",
 		"psalm:dev": "vendor-bin/psalm/vendor/bin/psalm --no-cache --threads=$(nproc)",
-		"psalm:update-baseline": "vendor-bin/psalm/vendor/bin/psalm --threads=1 --update-baseline"
+		"psalm:update-baseline": "vendor-bin/psalm/vendor/bin/psalm --threads=1 --update-baseline",
+		"unit:test": "vendor-bin/phpunit/vendor/bin/phpunit -c tests/phpunit.xml"
 	},
 	"config": {
 		"sort-packages": true,

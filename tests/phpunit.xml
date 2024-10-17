@@ -1,11 +1,14 @@
-<phpunit bootstrap="bootstrap.php" colors="true">
-    <!--
-    SPDX-FileCopyrightText: Hamza Mahjoubi <hamzamahjoubi22@proton.me>
-    SPDX-License-Identifier: AGPL-3.0-or-later
-    -->
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+SPDX-FileCopyrightText: Hamza Mahjoubi <hamzamahjoubi22@proton.me>
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 bootstrap="bootstrap.php"
+		 xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.6/phpunit.xsd">
     <testsuites>
-        <testsuite name="unit">
-            <directory>./Unit</directory>
+        <testsuite name="Email Viewer Tests">
+            <directory>./unit</directory>
         </testsuite>
     </testsuites>
 </phpunit>
