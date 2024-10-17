@@ -17,6 +17,7 @@ use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\DataResponse;
 use OCP\AppFramework\Http\StreamResponse;
+use OCP\Files\File;
 use OCP\Files\IRootFolder;
 use OCP\IRequest;
 use Psr\Log\LoggerInterface;
@@ -55,7 +56,7 @@ class PageController extends Controller {
 		}
 
 		$node = array_pop($nodes);
-		if (!$node instanceof \OCP\Files\File) {
+		if (!$node instanceof File) {
 			return new DataResponse([], Http::STATUS_NOT_FOUND);
 		}
 
