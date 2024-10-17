@@ -9,29 +9,24 @@ declare(strict_types=1);
 
 namespace OCA\Files_EmailViewer\Service;
 
-use OCA\Files_EmailViewer\AppInfo\Application;
 use OCA\Files_EmailViewer\Exception\ConversionException;
-use OCP\IConfig;
 use OCP\ITempManager;
 
 class ConversionService {
 
-	private string $binaryPath;
 
 	public function __construct(
-		private IConfig $config,
+		private SetupService $setupService,
 		private ITempManager $tempManager,
 	) {
-		$this->binaryPath = $this->config->getAppValue(Application::APP_ID, 'binary_path', '');
 	}
 
 	/**
+	 * @param string $filePath
 	 * @return string
 	 * @throws ConversionException
 	 */
 	public function convert(string $filePath): string {
-		$this->checkRequirements();
-
 		$resultPath = $this->tempManager->getTemporaryFile('eml2pdf');
 
 		$descriptors = [
@@ -39,9 +34,9 @@ class ConversionService {
 		];
 
 		$command = [
-			'java',
+			$this->setupService->getJava(),
 			'-jar',
-			$this->binaryPath,
+			$this->setupService->getEmailConverter(),
 			$filePath,
 			'-o',
 			$resultPath
@@ -69,16 +64,5 @@ class ConversionService {
 		}
 
 		return $resultPath;
-	}
-
-	private function checkRequirements(): void {
-		$disableFunctions = ini_get('disable_functions');
-		if ($disableFunctions !== false && str_contains($disableFunctions, 'proc_open')) {
-			throw new ConversionException('proc_open is disabled');
-		}
-
-		if ($this->binaryPath === '' || !file_exists($this->binaryPath)) {
-			throw new ConversionException('emailconverter.jar not found');
-		}
 	}
 }
