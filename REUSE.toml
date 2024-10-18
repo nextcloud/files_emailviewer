@@ -8,7 +8,7 @@ SPDX-PackageDownloadLocation = "https://github.com/nextcloud/files_emailviewer"
 [[annotations]]
 path = [
 	"l10n/**.js",
-	"l10n/**.json"
+	"l10n/**.json",
 ]
 precedence = "aggregate"
 SPDX-FileCopyrightText = "2024 Nextcloud GmbH and Nextcloud contributors"
@@ -23,6 +23,8 @@ path = [
 	"tests/psalm-baseline.xml",
 	"vendor-bin/**/composer.json",
 	"vendor-bin/**/composer.lock",
+	'.l10nignore',
+	'.tx/config',
 ]
 precedence = "aggregate"
 SPDX-FileCopyrightText = "none"
