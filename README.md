@@ -5,26 +5,28 @@ SPDX-License-Identifier: CC0-1.0
 
 # Email Viewer
 
-This app integrates the fantastic [Email to PDF Converter from Nick Russler](https://github.com/nickrussler/email-to-pdf-converter) into Nextcloud to view msg and eml files online.
+Email Viewer integrates the excellent [Email to PDF Converter](https://github.com/nickrussler/email-to-pdf-converter) into Nextcloud, enabling you to view .msg and .eml files.
 
-## Server configuration
+## Requirements
 
-- Nextcloud 28 (with viewer and files_pdfviewer)
+- Nextcloud 28 or newer
+- PDF Viewer for Nextcloud
+- [PHP proc_open](https://www.php.net/manual/en/function.proc-open.php)
 - OpenJDK
 - [wkhtmltopdf](https://wkhtmltopdf.org/)
 - [Email to PDF Converter](https://github.com/nickrussler/email-to-pdf-converter)
 
-## App setup
+## Installation
 
-- Place the app in your apps folder.
-- Store a copy of Email to PDF Converter on the server. Nextcloud must have access to it.
-- Enable the app (via `occ app:enable files_emailviewer`).
-- Set the path to Email to PDF Converter via `occ config:app:set --value /opt/emailconverter-2.6.0-all.jar files_emailviewer binary_path`.
-- Upload a msg or eml file and view it in Nextcloud 🙌
+- Download and enable files_emailviewer
+- Store a copy of the Email to PDF Converter on the server, ensuring that Nextcloud has access to it.
+- Set the path to Email to PDF Converter via `occ config:app:set --value /opt/emailconverter-3.0.0-all.jar files_emailviewer binary_path`.
+- Upload a .msg or .eml file and view it directly in Nextcloud 🙌
 
 ## Outgoing connections
 
-If the message contains images from outside sources, Email to PDF (actually wkhtmltopdf) will download the image, which means external connections are required.
+- If the email contains images from external sources, the Email to PDF converter will download the images, requiring external connections.
+- The current version does not consider Nextcloud's proxy configuration but should follow the system default.
 
 ## Building the app
 
