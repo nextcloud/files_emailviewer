@@ -1,0 +1,7 @@
+OC.L10N.register(
+    "files_emailviewer",
+    {
+    "Java is required to run the email-to-pdf converter." : "Se requiere Java para usar el conversor email-a-pdf",
+    "View .msg and .eml files" : "Ver archivos .msg y .eml"
+},
+"nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;");
