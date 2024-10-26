@@ -1,5 +1,5 @@
 { "translations": {
-    "Email Viewer" : "عارض البريد الالكتروني",
+    "Email Viewer" : "مستعرض البريد الالكتروني",
     "Enable the php function proc_open to run the email-to-pdf converter." : "تمكين دالة \"بي إتش بي\" proc_open  من إجراء التحول من إيميل إلى \"بي دي إف\".",
     "Java is required to run the email-to-pdf converter." : "الجافا ضرورية لإجراء التحويل من إيميل إلى \"بي دي إف\".",
     "Please install https://github.com/nickrussler/email-to-pdf-converter and set the path via `%s`" : "قم رجاءً بتثبيت https://github.com/nickrussler/email-to-pdf-converter و قم بتعيين المسار عبر `%s`",
