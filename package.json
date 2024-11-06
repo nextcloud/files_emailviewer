@@ -20,7 +20,7 @@
     "lint:fix": "eslint --ext .js,.vue src --fix"
   },
   "dependencies": {
-    "@nextcloud/router": "^2.2.0"
+    "@nextcloud/router": "^3.0.1"
   },
   "browserslist": [
     "extends @nextcloud/browserslist-config"
