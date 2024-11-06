@@ -1,0 +1,37 @@
+# SPDX-FileCopyrightText: 2024 Nextcloud GmbH and Nextcloud contributors
+# SPDX-License-Identifier: CC0-1.0
+version: 2
+updates:
+
+# Composer
+- package-ecosystem: composer
+  directory: "/"
+  versioning-strategy: "increase"
+  schedule:
+    interval: weekly
+    day: saturday
+    time: "03:15"
+    timezone: Europe/Berlin
+
+# Composer (tooling)
+- package-ecosystem: composer
+  directories:
+    - "/vendor-bin/cs-fixer"
+    - "/vendor-bin/phpunit"
+    - "/vendor-bin/psalm"
+  versioning-strategy: "increase"
+  schedule:
+    interval: weekly
+    day: saturday
+    time: "03:15"
+    timezone: Europe/Berlin
+
+# NPM
+- package-ecosystem: npm
+  directory: "/"
+  versioning-strategy: "increase"
+  schedule:
+    interval: weekly
+    day: saturday
+    time: "03:15"
+    timezone: Europe/Berlin
