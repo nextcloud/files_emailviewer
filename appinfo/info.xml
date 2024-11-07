@@ -33,7 +33,7 @@
 	<li>If the email contains images from external sources, the Email to PDF converter will download the images, requiring external connections</li>
 	<li>The current version does not consider Nextcloud's proxy configuration but should follow the system default</li>
 </ul>]]></description>
-    <version>0.1.0</version>
+    <version>0.1.1</version>
     <licence>agpl</licence>
     <author mail="hamzamahjoubi22@proton.me">Hamza Mahjoubi</author>
     <author mail="mail@danielkesselberg.de">Daniel Kesselberg</author>
