@@ -8,31 +8,29 @@
     <id>files_emailviewer</id>
     <name>Email Viewer</name>
     <summary>View .msg and .eml files</summary>
-    <description><![CDATA[<h4>Email Viewer integrates the excellent Email to PDF Converter into Nextcloud, enabling you to view .msg and .eml files.</h4>
+    <description><![CDATA[## Email Viewer integrates the excellent Email to PDF Converter into Nextcloud, enabling you to view .msg and .eml files.
 
-<h5>Requirements</h5>
-<ul>
-	<li>Nextcloud 28 or newer</li>
-	<li>PDF Viewer for Nextcloud</li>
-	<li>PHP proc_open</li>
-	<li>OpenJDK</li>
-	<li>wkhtmltopdf (https://wkhtmltopdf.org/)</li>
-	<li>Email to PDF Converter (https://github.com/nickrussler/email-to-pdf-converter)</li>
-</ul>
+### Requirements
 
-<h5>Installation</h5>
-<ul>
-	<li>Download and enable files_emailviewer</li>
-	<li>Store a copy of the Email to PDF Converter on the server, ensuring that Nextcloud has access to it</li>
-	<li>Set the path to Email to PDF Converter via `occ config:app:set --value /opt/emailconverter-3.0.0-all.jar files_emailviewer binary_path`</li>
-	<li>Upload a .msg or .eml file and view it directly in Nextcloud 🙌</li>
-</ul>
+- Nextcloud 28 or newer
+- PDF Viewer for Nextcloud
+- PHP proc_open
+- OpenJDK
+- [wkhtmltopdf](https://wkhtmltopdf.org/)
+- [Email to PDF Converter](https://github.com/nickrussler/email-to-pdf-converter)
 
-<h5>Outgoing connections</h5>
-<ul>
-	<li>If the email contains images from external sources, the Email to PDF converter will download the images, requiring external connections</li>
-	<li>The current version does not consider Nextcloud's proxy configuration but should follow the system default</li>
-</ul>]]></description>
+### Installation
+
+- Download and enable files_emailviewer
+- Store a copy of the Email to PDF Converter on the server, ensuring that Nextcloud has access to it
+- Set the path to Email to PDF Converter via `occ config:app:set --value /opt/emailconverter-3.0.0-all.jar files_emailviewer binary_path`
+- Upload a .msg or .eml file and view it directly in Nextcloud 🙌
+
+### Outgoing connections
+
+- If the email contains images from external sources, the Email to PDF converter will download the images, requiring external connections
+- The current version does not consider Nextcloud's proxy configuration but should follow the system default
+]]></description>
     <version>0.1.1</version>
     <licence>agpl</licence>
     <author mail="hamzamahjoubi22@proton.me">Hamza Mahjoubi</author>
