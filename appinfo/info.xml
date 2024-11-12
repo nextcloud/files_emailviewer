@@ -2,7 +2,7 @@
 <info xmlns:xsi= "http://www.w3.org/2001/XMLSchema-instance"
       xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
     <!--
-    SPDX-FileCopyrightText: Hamza Mahjoubi <hamzamahjoubi22@proton.me>
+    SPDX-FileCopyrightText: Hamza Mahjoubi <hamza.mahjoubi221@proton.me>
     SPDX-License-Identifier: CC0-1.0
     -->
     <id>files_emailviewer</id>
@@ -33,7 +33,7 @@
 ]]></description>
     <version>0.1.2</version>
     <licence>agpl</licence>
-    <author mail="hamzamahjoubi22@proton.me">Hamza Mahjoubi</author>
+    <author mail="hamza.mahjoubi221@proton.me">Hamza Mahjoubi</author>
     <author mail="mail@danielkesselberg.de">Daniel Kesselberg</author>
     <namespace>Files_EmailViewer</namespace>
     <category>tools</category>
