@@ -42,7 +42,12 @@ class ConversionService {
 			$resultPath
 		];
 
-		$process = proc_open($command, $descriptors, $pipes);
+		$env = [
+			'LANG=C.UTF-8',
+			'LC_ALL=C.UTF-8',
+		];
+
+		$process = proc_open($command, $descriptors, $pipes, null, $env);
 		if ($process === false) {
 			throw new ConversionException('Could not invoke emailconverter.jar');
 		}
