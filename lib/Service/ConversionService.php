@@ -37,9 +37,10 @@ class ConversionService {
 			$this->setupService->getJava(),
 			'-jar',
 			$this->setupService->getEmailConverter(),
+			'--add-attachment-names',
+			'--output-filepath',
+			$resultPath,
 			$filePath,
-			'-o',
-			$resultPath
 		];
 
 		$env = [
