@@ -61,7 +61,7 @@ class ConversionService {
 		}
 
 		if (str_contains($stdout, 'Conversion finished') === false) {
-			throw new ConversionException('Conversion did not finish');
+			throw new ConversionException('The command output does not contain the phrase "Conversion finished". Output: ' . $stdout);
 		}
 
 		$status = proc_close($process);
