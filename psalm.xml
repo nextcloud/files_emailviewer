@@ -1,11 +1,12 @@
 <?xml version="1.0"?>
 <psalm
-		errorLevel="1"
-		resolveFromConfigFile="true"
-		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		xmlns="https://getpsalm.org/schema/config"
-		xsi:schemaLocation="https://getpsalm.org/schema/config vendor-bin/psalm/vendor/vimeo/psalm/config.xsd"
-		errorBaseline="tests/psalm-baseline.xml"
+	errorLevel="1"
+	resolveFromConfigFile="true"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="https://getpsalm.org/schema/config"
+	xsi:schemaLocation="https://getpsalm.org/schema/config vendor-bin/psalm/vendor/vimeo/psalm/config.xsd"
+	errorBaseline="tests/psalm-baseline.xml"
+	phpVersion="8.0"
 >
 	<!--
 	SPDX-FileCopyrightText: Hamza Mahjoubi <hamza.mahjoubi221@proton.me>
