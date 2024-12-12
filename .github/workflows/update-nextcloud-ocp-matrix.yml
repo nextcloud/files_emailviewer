@@ -20,14 +20,15 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        branches: ['main']
+        branches: ['master']
         target: ['stable28']
 
     name: update-nextcloud-ocp-${{ matrix.branches }}
 
     steps:
-      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
+          persist-credentials: false
           ref: ${{ matrix.branches }}
           submodules: true
 
@@ -81,7 +82,7 @@ jobs:
         continue-on-error: true
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@6cd32fd93684475c31847837f87bb135d40a2b79 # v7.0.3
+        uses: peter-evans/create-pull-request@5e914681df9dc83aa4e4905692ca88beb2f9e91f # v7.0.5
         with:
           token: ${{ secrets.COMMAND_BOT_PAT }}
           commit-message: 'chore(dev-deps): Bump nextcloud/ocp package'
