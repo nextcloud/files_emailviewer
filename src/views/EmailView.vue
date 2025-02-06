@@ -45,16 +45,19 @@ export default {
 				fileId: fileInfo.fileid,
 			})
 
+			const fileInfoPDF = {
+				filename: fileInfo.filename,
+				source: sourceUrl,
+				basename: fileInfo.basename,
+				mime: fileInfo.mime,
+				etag: 'fixme',
+				hasPreview: false,
+				fileid: fileInfo.fileid,
+			}
+
 			OCA.Viewer.openWith('pdf', {
-				fileInfo: {
-					filename: fileInfo.filename,
-					source: sourceUrl,
-					basename: fileInfo.basename,
-					mime: fileInfo.mime,
-					etag: 'fixme',
-					hasPreview: false,
-					fileid: fileInfo.fileid,
-				},
+				fileInfo: fileInfoPDF,
+				list: [fileInfoPDF],
 			})
 		},
 	},
