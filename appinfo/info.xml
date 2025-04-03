@@ -37,7 +37,7 @@
     <category>tools</category>
     <bugs>https://github.com/nextcloud/files_emailviewer/issues</bugs>
     <dependencies>
-	<php min-version="8.0" max-version="8.3" />
+	<php min-version="8.0" max-version="8.4" />
         <nextcloud min-version="28" max-version="31"/>
     </dependencies>
 </info>
