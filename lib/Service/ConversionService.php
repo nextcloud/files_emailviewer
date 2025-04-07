@@ -28,6 +28,9 @@ class ConversionService {
 	 */
 	public function convert(string $filePath): string {
 		$resultPath = $this->tempManager->getTemporaryFile('eml2pdf');
+		if ($resultPath === false) {
+			throw new ConversionException('Could not create temporary file');
+		}
 
 		$descriptors = [
 			1 => ['pipe', 'w'],
