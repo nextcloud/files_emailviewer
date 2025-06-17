@@ -1,0 +1,8 @@
+{ "translations": {
+    "Email Viewer" : "Е-мейл визуализатор",
+    "Enable the php function proc_open to run the email-to-pdf converter." : "Включете php функцията proc_open за да стартирате е-мейл-към-pdf преобразувателя.",
+    "Java is required to run the email-to-pdf converter." : "Необходимо е да инсталирате Java за да използвате е-мейл-към-pdf преобразувателя.",
+    "Please install https://github.com/nickrussler/email-to-pdf-converter and set the path via `%s`" : "Моля, инсталирайте https://github.com/nickrussler/email-to-pdf-converter и задайте пътя чрез '%s'",
+    "View .msg and .eml files" : "Отвори .msg и .eml файлове"
+},"pluralForm" :"nplurals=2; plural=(n != 1);"
+}
