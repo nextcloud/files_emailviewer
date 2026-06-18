@@ -1,11 +1,11 @@
 OC.L10N.register(
     "files_emailviewer",
     {
-    "Email Viewer" : "رایانامه‌بین",
-    "Enable the php function proc_open to run the email-to-pdf converter." : "به کار انداختن تابع proc_open پی‌اچ‌پی برای اجرای تبدیلگر رایانامه به PDF.",
-    "Java is required to run the email-to-pdf converter." : " اجرای تبدیلگر رایانامه به PDF نیازمند جاواست.",
-    "Please install https://github.com/nickrussler/email-to-pdf-converter and set the path via `%s`" : "لطفا نصب https://github.com/nickrussler/email-to-pdf-converter و تنظیم مسیر با «%s»",
-    "View .msg and .eml files" : "دیدن پرونده‌های msg و eml",
+    "Email Viewer" : "نمایش‌دهنده ایمیل",
+    "Enable the php function proc_open to run the email-to-pdf converter." : "برای اجرای مبدل ایمیل به PDF، تابع php proc_open را فعال کنید.",
+    "Java is required to run the email-to-pdf converter." : "برای اجرای مبدل ایمیل به PDF، جاوا مورد نیاز است.",
+    "Please install https://github.com/nickrussler/email-to-pdf-converter and set the path via `%s`" : "لطفاً https://github.com/nickrussler/email-to-pdf-converter را نصب کرده و مسیر را از طریق `%s` تنظیم کنید.",
+    "View .msg and .eml files" : "مشاهده فایل‌های .msg و .eml",
     "### Email Viewer integrates the excellent Email to PDF Converter into Nextcloud, enabling you to view .msg and .eml files.\n\n#### Requirements\n\n- Nextcloud 28 or newer\n- Viewer and PDF Viewer for Nextcloud\n- PHP proc_open\n- [Email to PDF Converter](https://github.com/nickrussler/email-to-pdf-converter) (requires OpenJDK and [wkhtmltopdf](https://wkhtmltopdf.org/))\n\n#### Installation\n\n- Download and enable files_emailviewer\n- Store a copy of the Email to PDF Converter on the server, ensuring that Nextcloud has access to it\n- Set the path to Email to PDF Converter via `occ config:app:set --value /opt/emailconverter-3.0.0-all.jar files_emailviewer binary_path`\n- Upload a .msg or .eml file and view it directly in Nextcloud 🙌\n\n#### Outgoing connections\n\n- If the email contains images from external sources, the Email to PDF converter will download the images, requiring external connections\n- The current version does not consider Nextcloud's proxy configuration but should follow the system default" : "### Email Viewer مبدل عالی Email to PDF Converter را با Nextcloud یکپارچه می‌کند تا بتوانید فایل‌های .msg و .eml را ببینید.\n\n#### نیازمندی‌ها\n\n- Nextcloud 28 یا جدیدتر\n- Viewer و PDF Viewer برای Nextcloud\n- PHP proc_open\n- [Email to PDF Converter](https://github.com/nickrussler/email-to-pdf-converter) (نیازمند OpenJDK و [wkhtmltopdf](https://wkhtmltopdf.org/))\n\n#### نصب\n\n- files_emailviewer را دانلود و فعال کنید\n- یک نسخه از Email to PDF Converter را روی سرور نگه دارید و مطمئن شوید Nextcloud به آن دسترسی دارد\n- مسیر Email to PDF Converter را با فرمان occ config:app:set --value /opt/emailconverter-3.0.0-all.jar files_emailviewer binary_path تنظیم کنید\n- یک فایل .msg یا .eml بارگذاری کنید و آن را مستقیماً در Nextcloud ببینید\n\n#### اتصال‌های خروجی\n\n- اگر ایمیل شامل تصویرهایی از منابع خارجی باشد، مبدل Email to PDF تصویرها را دانلود می‌کند و به اتصال خارجی نیاز دارد\n- نسخه فعلی پیکربندی proxy در Nextcloud را در نظر نمی‌گیرد، اما باید از پیش‌فرض سیستم پیروی کند"
 },
 "nplurals=2; plural=(n > 1);");
