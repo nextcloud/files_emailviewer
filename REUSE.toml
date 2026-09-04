@@ -25,6 +25,7 @@ path = [
 	"vendor-bin/**/composer.lock",
 	'.l10nignore',
 	'.tx/config',
+	'.tx/backport',
 	'.github/workflows/*.patch'
 ]
 precedence = "aggregate"
