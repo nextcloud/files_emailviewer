@@ -22,7 +22,6 @@ use PHPUnit\Framework\TestCase;
 
 class PageControllerTest extends TestCase {
 
-
 	private IRequest|MockObject $request;
 	private SetupService|MockObject $setupService;
 	private IRootFolder|MockObject $rootFolder;

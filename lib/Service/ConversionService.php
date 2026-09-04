@@ -14,7 +14,6 @@ use OCP\ITempManager;
 
 class ConversionService {
 
-
 	public function __construct(
 		private SetupService $setupService,
 		private ITempManager $tempManager,
