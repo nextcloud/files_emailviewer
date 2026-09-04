@@ -12,7 +12,7 @@
 
 #### Requirements
 
-- Nextcloud 28 or newer
+- Nextcloud 34 or newer
 - Viewer and PDF Viewer for Nextcloud
 - PHP proc_open
 - [Email to PDF Converter](https://github.com/nickrussler/email-to-pdf-converter) (requires OpenJDK and [wkhtmltopdf](https://wkhtmltopdf.org/))
@@ -29,7 +29,7 @@
 - If the email contains images from external sources, the Email to PDF converter will download the images, requiring external connections
 - The current version does not consider Nextcloud's proxy configuration but should follow the system default
 ]]></description>
-    <version>0.1.6</version>
+    <version>0.2.0</version>
     <licence>agpl</licence>
     <author mail="hamza.mahjoubi221@proton.me">Hamza Mahjoubi</author>
     <author mail="mail@danielkesselberg.de">Daniel Kesselberg</author>
@@ -37,7 +37,7 @@
     <category>tools</category>
     <bugs>https://github.com/nextcloud/files_emailviewer/issues</bugs>
     <dependencies>
-	<php min-version="8.0" max-version="8.5" />
-    <nextcloud min-version="28" max-version="33"/>
+	<php min-version="8.2" max-version="8.5" />
+    <nextcloud min-version="34" max-version="35"/>
     </dependencies>
 </info>

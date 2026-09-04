@@ -11,7 +11,7 @@ Email Viewer integrates the excellent [Email to PDF Converter](https://github.co
 
 ## Requirements
 
-- Nextcloud 28 or newer
+- Nextcloud 34 or newer
 - Viewer and PDF Viewer for Nextcloud
 - [PHP proc_open](https://www.php.net/manual/en/function.proc-open.php)
 - [Email to PDF Converter](https://github.com/nickrussler/email-to-pdf-converter) (requires OpenJDK and [wkhtmltopdf](https://wkhtmltopdf.org/))
