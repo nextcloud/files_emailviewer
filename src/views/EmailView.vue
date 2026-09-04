@@ -21,7 +21,6 @@ export default {
 	},
 
 	async mounted() {
-
 		this.showViewer(this.file)
 		this.doneLoading()
 
