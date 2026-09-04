@@ -9,12 +9,14 @@ import EmailView from './views/EmailView.vue'
  */
 function initEmailViewer() {
 	if (!OCA.Viewer) {
+		// eslint-disable-next-line no-console
 		console.debug('cannot register files_emailviewer because OCA.Viewer not found')
 		return
 	}
 
 	const pdfHandler = OCA.Viewer.availableHandlers.find((handler) => handler.id === 'pdf')
 	if (!pdfHandler) {
+		// eslint-disable-next-line no-console
 		console.debug('cannot register files_emailviewer because the pdf handler for OCA.Viewer is unavailable')
 		return
 	}
