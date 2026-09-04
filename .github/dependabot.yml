@@ -6,12 +6,20 @@ updates:
 # Composer
 - package-ecosystem: composer
   directory: "/"
+  commit-message:
+    prefix: "build"
+    include: "scope"
   versioning-strategy: "increase"
   schedule:
     interval: weekly
     day: saturday
     time: "03:15"
     timezone: Europe/Berlin
+  cooldown:
+    default-days: 10
+  labels:
+    - 3. to review
+    - dependencies
 
 # Composer (tooling)
 - package-ecosystem: composer
@@ -19,19 +27,35 @@ updates:
     - "/vendor-bin/cs-fixer"
     - "/vendor-bin/phpunit"
     - "/vendor-bin/psalm"
+  commit-message:
+    prefix: "ci"
+    include: "scope"
   versioning-strategy: "increase"
   schedule:
     interval: weekly
     day: saturday
     time: "03:15"
     timezone: Europe/Berlin
+  cooldown:
+    default-days: 10
+  labels:
+    - 3. to review
+    - dependencies
 
 # NPM
 - package-ecosystem: npm
   directory: "/"
+  commit-message:
+    prefix: "build"
+    include: "scope"
   versioning-strategy: "increase"
   schedule:
     interval: weekly
     day: saturday
     time: "03:15"
     timezone: Europe/Berlin
+  cooldown:
+    default-days: 10
+  labels:
+    - 3. to review
+    - dependencies
