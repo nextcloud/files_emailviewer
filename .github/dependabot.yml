@@ -48,6 +48,14 @@ updates:
   commit-message:
     prefix: "build"
     include: "scope"
+  groups:
+    npm-dev:
+      dependency-type: development
+    npm-prod:
+      dependency-type: production
+      update-types:
+        - minor
+        - patch
   versioning-strategy: "increase"
   schedule:
     interval: weekly
