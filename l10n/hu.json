@@ -1,0 +1,8 @@
+{ "translations": {
+    "Email Viewer" : "E-mail-megjelenítő",
+    "Enable the php function proc_open to run the email-to-pdf converter." : "Az email-to-pdf átalakító futtatásához engedélyezze a proc_open PHP-függvényt.",
+    "Java is required to run the email-to-pdf converter." : "Az email-to-pdf átalakító futtatásához Java szükséges.",
+    "Please install https://github.com/nickrussler/email-to-pdf-converter and set the path via `%s`" : "Telepítse a https://github.com/nickrussler/email-to-pdf-converter programot, és állítsa be az elérési útját ezzel: `%s`",
+    "View .msg and .eml files" : "MSG és EML-fájlok megtekintése"
+},"pluralForm" :"nplurals=2; plural=(n != 1);"
+}
