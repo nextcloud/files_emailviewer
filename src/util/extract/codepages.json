@@ -1,0 +1,293 @@
+[
+	{
+		"codepage": 437,
+		"iconvName": "cp437"
+	},
+	{
+		"codepage": 708,
+		"iconvName": "iso88596"
+	},
+	{
+		"codepage": 720,
+		"iconvName": "cp720"
+	},
+	{
+		"codepage": 737,
+		"iconvName": "cp737"
+	},
+	{
+		"codepage": 775,
+		"iconvName": "cp775"
+	},
+	{
+		"codepage": 850,
+		"iconvName": "cp850"
+	},
+	{
+		"codepage": 852,
+		"iconvName": "cp852"
+	},
+	{
+		"codepage": 855,
+		"iconvName": "cp855"
+	},
+	{
+		"codepage": 857,
+		"iconvName": "cp857"
+	},
+	{
+		"codepage": 858,
+		"iconvName": "cp858"
+	},
+	{
+		"codepage": 860,
+		"iconvName": "cp860"
+	},
+	{
+		"codepage": 861,
+		"iconvName": "cp861"
+	},
+	{
+		"codepage": 862,
+		"iconvName": "cp862"
+	},
+	{
+		"codepage": 863,
+		"iconvName": "cp863"
+	},
+	{
+		"codepage": 864,
+		"iconvName": "cp864"
+	},
+	{
+		"codepage": 865,
+		"iconvName": "cp865"
+	},
+	{
+		"codepage": 866,
+		"iconvName": "cp866"
+	},
+	{
+		"codepage": 869,
+		"iconvName": "cp869"
+	},
+	{
+		"codepage": 874,
+		"iconvName": "windows874"
+	},
+	{
+		"codepage": 932,
+		"iconvName": "shiftjis"
+	},
+	{
+		"codepage": 936,
+		"iconvName": "cp936"
+	},
+	{
+		"codepage": 949,
+		"iconvName": "cp949"
+	},
+	{
+		"codepage": 950,
+		"iconvName": "cp950"
+	},
+	{
+		"codepage": 1200,
+		"iconvName": "ucs2"
+	},
+	{
+		"codepage": 1201,
+		"iconvName": "utf16be"
+	},
+	{
+		"codepage": 1250,
+		"iconvName": "windows1250"
+	},
+	{
+		"codepage": 1251,
+		"iconvName": "windows1251"
+	},
+	{
+		"codepage": 1252,
+		"iconvName": "windows1252"
+	},
+	{
+		"codepage": 1253,
+		"iconvName": "windows1253"
+	},
+	{
+		"codepage": 1254,
+		"iconvName": "windows1254"
+	},
+	{
+		"codepage": 1255,
+		"iconvName": "windows1255"
+	},
+	{
+		"codepage": 1256,
+		"iconvName": "windows1256"
+	},
+	{
+		"codepage": 1257,
+		"iconvName": "windows1257"
+	},
+	{
+		"codepage": 1258,
+		"iconvName": "windows1258"
+	},
+	{
+		"codepage": 10000,
+		"iconvName": "macroman"
+	},
+	{
+		"codepage": 10006,
+		"iconvName": "macgreek"
+	},
+	{
+		"codepage": 10007,
+		"iconvName": "maccyrillic"
+	},
+	{
+		"codepage": 10010,
+		"iconvName": "macromania"
+	},
+	{
+		"codepage": 10017,
+		"iconvName": "macukraine"
+	},
+	{
+		"codepage": 10021,
+		"iconvName": "macthai"
+	},
+	{
+		"codepage": 10029,
+		"iconvName": "maccenteuro"
+	},
+	{
+		"codepage": 10079,
+		"iconvName": "maciceland"
+	},
+	{
+		"codepage": 10081,
+		"iconvName": "macturkish"
+	},
+	{
+		"codepage": 10082,
+		"iconvName": "maccroatian"
+	},
+	{
+		"codepage": 12000,
+		"iconvName": "utf32le"
+	},
+	{
+		"codepage": 12001,
+		"iconvName": "utf32be"
+	},
+	{
+		"codepage": 20127,
+		"iconvName": "windows1252"
+	},
+	{
+		"codepage": 20866,
+		"iconvName": "koi8r"
+	},
+	{
+		"codepage": 20932,
+		"iconvName": "eucjp"
+	},
+	{
+		"codepage": 20936,
+		"iconvName": "cp936"
+	},
+	{
+		"codepage": 21866,
+		"iconvName": "koi8u"
+	},
+	{
+		"codepage": 28591,
+		"iconvName": "windows1252"
+	},
+	{
+		"codepage": 28592,
+		"iconvName": "iso88592"
+	},
+	{
+		"codepage": 28593,
+		"iconvName": "iso88593"
+	},
+	{
+		"codepage": 28594,
+		"iconvName": "iso88594"
+	},
+	{
+		"codepage": 28595,
+		"iconvName": "iso88595"
+	},
+	{
+		"codepage": 28596,
+		"iconvName": "iso88596"
+	},
+	{
+		"codepage": 28597,
+		"iconvName": "iso88597"
+	},
+	{
+		"codepage": 28598,
+		"iconvName": "iso88598"
+	},
+	{
+		"codepage": 28599,
+		"iconvName": "windows1254"
+	},
+	{
+		"codepage": 28603,
+		"iconvName": "iso885913"
+	},
+	{
+		"codepage": 28605,
+		"iconvName": "iso885915"
+	},
+	{
+		"codepage": 38598,
+		"iconvName": "iso88598"
+	},
+	{
+		"codepage": 50220,
+		"iconvName": "",
+		"textDecoderLabel": "iso-2022-jp"
+	},
+	{
+		"codepage": 50221,
+		"iconvName": "",
+		"textDecoderLabel": "iso-2022-jp"
+	},
+	{
+		"codepage": 50222,
+		"iconvName": "",
+		"textDecoderLabel": "iso-2022-jp"
+	},
+	{
+		"codepage": 51932,
+		"iconvName": "eucjp"
+	},
+	{
+		"codepage": 51936,
+		"iconvName": "cp936"
+	},
+	{
+		"codepage": 51949,
+		"iconvName": "cp949"
+	},
+	{
+		"codepage": 54936,
+		"iconvName": "gb18030"
+	},
+	{
+		"codepage": 65000,
+		"iconvName": "utf7"
+	},
+	{
+		"codepage": 65001,
+		"iconvName": "utf8"
+	}
+]

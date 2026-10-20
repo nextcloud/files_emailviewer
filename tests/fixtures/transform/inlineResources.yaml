@@ -1,0 +1,108 @@
+# SPDX-FileCopyrightText: 2026 Nextcloud GmbH and Nextcloud contributors
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+# Cases for replacing the `cid:` URLs of inline attachments while sanitizing HTML.
+#
+# `cid:` URLs of inline attachments are replaced with `data:` URLs in attributes, but not in CSS.
+# Other URLs in these attributes are emptied, besides the `data:` URLs of the email itself.
+# The inline attachments that the body does not show are listed as attachments.
+
+- description: replace cid URL in image
+  raw: '<img src="cid:logo@example.com">'
+  inline:
+    - contentId: logo@example.com
+      mimeType: image/png
+      data: AQID
+  sanitized: '<img src="data:;base64,AQID">'
+
+- description: replace uppercase cid URL
+  raw: '<img src="CID:logo@example.com">'
+  inline:
+    - contentId: logo@example.com
+      mimeType: image/png
+      data: AQID
+  sanitized: '<img src="data:;base64,AQID">'
+
+# `background` and `poster` are URI safe attributes, so that DOMPurify keeps their `data:` URLs
+- description: replace cid URLs in background attribute and video
+  raw: '<table background="cid:logo@example.com"><tr><td>Hello</td></tr></table><video src="cid:video@example.com" poster="cid:logo@example.com"></video>'
+  inline:
+    - contentId: logo@example.com
+      mimeType: image/png
+      data: AQID
+    - contentId: video@example.com
+      mimeType: video/mp4
+      data: AAAA
+  sanitized: '<table background="data:;base64,AQID"><tbody><tr><td>Hello</td></tr></tbody></table><video src="data:;base64,AAAA" poster="data:;base64,AQID"></video>'
+
+- description: replace cid URL of the same attachment twice
+  raw: '<img src="cid:logo@example.com"><img src="cid:logo@example.com">'
+  inline:
+    - contentId: logo@example.com
+      mimeType: image/png
+      data: AQID
+  sanitized: '<img src="data:;base64,AQID"><img src="data:;base64,AQID">'
+
+- description: replace cid URL without the mime type of the attachment
+  raw: '<img src="cid:logo@example.com">'
+  inline:
+    - contentId: logo@example.com
+      mimeType: 'image/png" onerror="alert(1)'
+      data: AQID
+  sanitized: '<img src="data:;base64,AQID">'
+
+- description: empty external URLs
+  raw: '<img src="https://example.com/logo.png" alt="Logo"><table background="https://example.com/background.png"><tr><td>Hello</td></tr></table><video poster="https://example.com/poster.png" src="https://example.com/video.mp4"></video>'
+  sanitized: '<img src="" alt="Logo"><table background=""><tbody><tr><td>Hello</td></tr></tbody></table><video poster="" src=""></video>'
+
+- description: empty relative URL
+  raw: '<img src="/logo.png">'
+  sanitized: '<img src="">'
+
+- description: keep data URL of the email
+  raw: '<img src="data:image/png;base64,iVBORw==">'
+  sanitized: '<img src="data:image/png;base64,iVBORw==">'
+
+- description: empty cid URL of missing attachment
+  raw: '<img src="cid:missing@example.com">'
+  inline:
+    - contentId: logo@example.com
+      mimeType: image/png
+      data: AQID
+  sanitized: '<img src="">'
+  unusedInline:
+    - logo@example.com
+
+- description: keep cid URL in style attribute, list the attachment
+  raw: '<p style="background: url(cid:logo@example.com)">Hello</p>'
+  inline:
+    - contentId: logo@example.com
+      mimeType: image/png
+      data: AQID
+  sanitized: '<p style="background: url(cid:logo@example.com)">Hello</p>'
+  unusedInline:
+    - logo@example.com
+
+- description: list unused attachment
+  raw: '<img src="cid:logo@example.com">'
+  inline:
+    - contentId: logo@example.com
+      mimeType: image/png
+      data: AQID
+    - contentId: unused@example.com
+      mimeType: image/png
+      data: BA==
+  sanitized: '<img src="data:;base64,AQID">'
+  unusedInline:
+    - unused@example.com
+
+# links are not resources, see sanitization.yaml
+- description: remove cid link, list the attachment
+  raw: '<a href="cid:logo@example.com">Logo</a>'
+  inline:
+    - contentId: logo@example.com
+      mimeType: image/png
+      data: AQID
+  sanitized: '<a>Logo</a>'
+  unusedInline:
+    - logo@example.com

@@ -6,5 +6,5 @@ declare(strict_types=1);
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 return ['routes' => [
-	['name' => 'page#convert', 'url' => '/convert', 'verb' => 'GET'],
+	['name' => 'page#getRenderFramePage', 'url' => '/render-frame-page', 'verb' => 'GET'],
 ]];

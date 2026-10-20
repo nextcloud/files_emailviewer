@@ -1,0 +1,211 @@
+# SPDX-FileCopyrightText: 2026 Nextcloud GmbH and Nextcloud contributors
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+# Cases for extracting the file and inline attachments of an email.
+
+- description: no attachments
+  eml: "\r\n\
+    Hello\r\n\
+    "
+  expectedAttachments:
+    inline: []
+    files: []
+
+- description: file attachment
+  eml: "Content-Type: multipart/mixed; boundary=\"BOUNDARY\"\r\n\
+    \r\n\
+    --BOUNDARY\r\n\
+    \r\n\
+    Hello\r\n\
+    --BOUNDARY\r\n\
+    Content-Disposition: attachment; filename=\"report.pdf\"\r\n\
+    \r\n\
+    data\r\n\
+    --BOUNDARY--\r\n\
+    "
+  expectedAttachments:
+    inline: []
+    files:
+      - { filename: report.pdf }
+
+- description: inline attachment
+  eml: "Content-Type: multipart/mixed; boundary=\"BOUNDARY\"\r\n\
+    \r\n\
+    --BOUNDARY\r\n\
+    \r\n\
+    Hello\r\n\
+    --BOUNDARY\r\n\
+    Content-Type: image/png\r\n\
+    Content-Disposition: inline; filename=\"logo.png\"\r\n\
+    Content-ID: <logo@example.com>\r\n\
+    Content-Transfer-Encoding: base64\r\n\
+    \r\n\
+    iVBORw==\r\n\
+    --BOUNDARY--\r\n\
+    "
+  expectedAttachments:
+    inline:
+      - { contentId: logo@example.com, filename: logo.png, mimeType: image/png, data: iVBORw== }
+    files: []
+
+- description: content ID without angle brackets
+  eml: "Content-Type: multipart/mixed; boundary=\"BOUNDARY\"\r\n\
+    \r\n\
+    --BOUNDARY\r\n\
+    \r\n\
+    Hello\r\n\
+    --BOUNDARY\r\n\
+    Content-Type: image/png\r\n\
+    Content-Disposition: inline; filename=\"logo.png\"\r\n\
+    Content-ID: logo@example.com\r\n\
+    Content-Transfer-Encoding: base64\r\n\
+    \r\n\
+    iVBORw==\r\n\
+    --BOUNDARY--\r\n\
+    "
+  expectedAttachments:
+    inline:
+      - { contentId: logo@example.com, filename: logo.png, mimeType: image/png, data: iVBORw== }
+    files: []
+
+- description: inline attachment without file name
+  eml: "Content-Type: multipart/mixed; boundary=\"BOUNDARY\"\r\n\
+    \r\n\
+    --BOUNDARY\r\n\
+    \r\n\
+    Hello\r\n\
+    --BOUNDARY\r\n\
+    Content-Type: image/png\r\n\
+    Content-ID: <logo@example.com>\r\n\
+    Content-Transfer-Encoding: base64\r\n\
+    \r\n\
+    iVBORw==\r\n\
+    --BOUNDARY--\r\n\
+    "
+  expectedAttachments:
+    inline:
+      - { contentId: logo@example.com, filename: null, mimeType: image/png, data: iVBORw== }
+    files: []
+
+- description: attachment with empty content ID
+  eml: "Content-Type: multipart/mixed; boundary=\"BOUNDARY\"\r\n\
+    \r\n\
+    --BOUNDARY\r\n\
+    \r\n\
+    Hello\r\n\
+    --BOUNDARY\r\n\
+    Content-Disposition: attachment; filename=\"logo.png\"\r\n\
+    Content-ID: <>\r\n\
+    \r\n\
+    data\r\n\
+    --BOUNDARY--\r\n\
+    "
+  expectedAttachments:
+    inline: []
+    files:
+      - { filename: logo.png }
+
+- description: attachment without file name
+  eml: "Content-Type: multipart/mixed; boundary=\"BOUNDARY\"\r\n\
+    \r\n\
+    --BOUNDARY\r\n\
+    \r\n\
+    Hello\r\n\
+    --BOUNDARY\r\n\
+    Content-Disposition: attachment\r\n\
+    \r\n\
+    data\r\n\
+    --BOUNDARY--\r\n\
+    "
+  expectedAttachments:
+    inline: []
+    files:
+      - { filename: null }
+
+- description: encoded file name
+  eml: "Content-Type: multipart/mixed; boundary=\"BOUNDARY\"\r\n\
+    \r\n\
+    --BOUNDARY\r\n\
+    \r\n\
+    Hello\r\n\
+    --BOUNDARY\r\n\
+    Content-Disposition: attachment; filename*=UTF-8''Gr%C3%BC%C3%9Fe.pdf\r\n\
+    \r\n\
+    data\r\n\
+    --BOUNDARY--\r\n\
+    "
+  expectedAttachments:
+    inline: []
+    files:
+      - { filename: Grüße.pdf }
+
+- description: forwarded email attachment
+  eml: "Content-Type: multipart/mixed; boundary=\"BOUNDARY\"\r\n\
+    \r\n\
+    --BOUNDARY\r\n\
+    \r\n\
+    Hello\r\n\
+    --BOUNDARY\r\n\
+    Content-Type: message/rfc822\r\n\
+    Content-Disposition: attachment; filename=\"forwarded.eml\"\r\n\
+    \r\n\
+    Subject: Forwarded\r\n\
+    \r\n\
+    Forwarded body\r\n\
+    --BOUNDARY--\r\n\
+    "
+  expectedAttachments:
+    inline: []
+    files:
+      - { filename: forwarded.eml }
+
+- description: HTML file attachment
+  eml: "Content-Type: multipart/mixed; boundary=\"BOUNDARY\"\r\n\
+    \r\n\
+    --BOUNDARY\r\n\
+    \r\n\
+    Hello\r\n\
+    --BOUNDARY\r\n\
+    Content-Type: text/html\r\n\
+    Content-Disposition: attachment; filename=\"page.html\"\r\n\
+    \r\n\
+    <p>Attached page</p>\r\n\
+    --BOUNDARY--\r\n\
+    "
+  expectedAttachments:
+    inline: []
+    files:
+      - { filename: page.html }
+
+- description: inline attachments
+  msg: parsing-examples/HTML mail with replyto and attachment and embedded image.msg
+  expectedAttachments:
+    inline:
+      - contentId: thumbsup
+        filename: thumbsup
+        mimeType: image/png
+        data: "iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABeElEQVRYw2NgoAAYGxu3GxkZ7TY1\
+          NZVloDcAWq4MxH+B+D8Qv3FwcOCgtwM6oJaDMTAUXOhmuYqKCjvQ0pdoDrCnmwNMTEwakC0H4u8G\
+          BgYC9Ap6DSD+iewAoIPm0ctyLqBlp9F8/x+YE4zpYT8T0LL16JYD8U26+B7oyz4sloPwenpYno3D\
+          chCeROsUbwa05A8eB3wB4kqgIxOAuArIng7EW4H4EhC/B+JXQLwDaI4ryZaDSjeg5mt4LCcFXyIn\
+          1fdSyXJQVt1OtMWGhoai0OD8T0W8GohZifE1PxD/o7LlsPLiFNAKRrwOABWptLAcqc6QGDAHQEOA\
+          YaAc8BNotsJAOgAUAosG1AFA/AtUoY3YEFhKMAvS2AE7iC1+WaG1H6gY3gzE36hUFJ8mqzbU1dUV\
+          BBqQBzTgIDQRkWo5qCZdpaenJ0Zx1aytrc0DDB0foIG1oAYKqC0IZK8D4n1AfA6IzwPxXpCFoGoZ\
+          VEUDaRGGUTAKRgEeAAA2eGJC+ETCiAAAAABJRU5ErkJggg=="
+      - { contentId: dresscode.txt, filename: dresscode.txt, mimeType: text/plain, data: QmxhY2sgVGllIE9wdGlvbmFs }
+      - { contentId: location, filename: location.txt, mimeType: text/plain, data: T24gdGhlIG1vb24h }
+    files: []
+
+- description: file attachment with a bracket in the name
+  msg: parsing-examples/attachment with a bracket in the name.msg
+  expectedAttachments:
+    inline: []
+    files:
+      - { filename: "Attachment[1.pdf" }
+
+- description: attached .msg file
+  msg: parsing-examples/nested simple mail.msg
+  expectedAttachments:
+    inline: []
+    files:
+      - { filename: null }

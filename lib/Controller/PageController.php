@@ -9,72 +9,64 @@ declare(strict_types=1);
 
 namespace OCA\Files_EmailViewer\Controller;
 
+use OC\Security\CSP\ContentSecurityPolicyNonceManager;
 use OCA\Files_EmailViewer\AppInfo\Application;
-use OCA\Files_EmailViewer\Exception\ConversionException;
-use OCA\Files_EmailViewer\Service\ConversionService;
-use OCA\Files_EmailViewer\Service\SetupService;
+use OCP\App\IAppManager;
 use OCP\AppFramework\Controller;
-use OCP\AppFramework\Http;
-use OCP\AppFramework\Http\DataResponse;
-use OCP\AppFramework\Http\StreamResponse;
-use OCP\Files\File;
-use OCP\Files\IRootFolder;
+use OCP\AppFramework\Http\Attribute\NoCSRFRequired;
+use OCP\AppFramework\Http\Attribute\PublicPage;
+use OCP\AppFramework\Http\EmptyContentSecurityPolicy;
+use OCP\AppFramework\Http\TemplateResponse;
 use OCP\IRequest;
-use Psr\Log\LoggerInterface;
+use OCP\IURLGenerator;
 
 class PageController extends Controller {
 	public function __construct(
 		IRequest $request,
-		private ?string $userId,
-		private SetupService $setupService,
-		private IRootFolder $root,
-		private ConversionService $conversionService,
-		private LoggerInterface $logger,
+		private IURLGenerator $urlGenerator,
+		private IAppManager $appManager,
+		private ContentSecurityPolicyNonceManager $nonceManager,
 	) {
 		parent::__construct(Application::APP_ID, $request);
 	}
 
 	/**
-	 * @NoAdminRequired
-	 * @NoCSRFRequired
-	 * @return StreamResponse|DataResponse
+	 * The page in which an email is rendered to PDF, see src/render-frame.ts.
 	 */
-	public function convert(int $fileId) {
-		if ($this->userId === null) {
-			return new DataResponse([], Http::STATUS_BAD_REQUEST);
-		}
+	#[PublicPage]
+	#[NoCSRFRequired]
+	public function getRenderFramePage(): TemplateResponse {
+		$nonce = $this->nonceManager->getNonce();
 
-		if (!$this->setupService->isReady()) {
-			return new DataResponse([], Http::STATUS_NOT_IMPLEMENTED);
-		}
+		// `ContentSecurityPolicy` would be merged with the default CSP, which would widen it.
+		$policy = new EmptyContentSecurityPolicy();
 
-		$userFolder = $this->root->getUserFolder($this->userId);
-		$nodes = $userFolder->getById($fileId);
+		// `addAllowedScriptDomain("'self'")` needs to be set together with `useJsNonce($nonce);`.
+		// Otherwise `EmptyContentSecurityPolicy#buildPolicy` fails to execute.
+		// The resulting CSP still only allows the nonced script,
+		// because `#buildPolicy` drops `'self'` when a nonce is provided.
+		$policy->addAllowedScriptDomain("'self'");
+		$policy->useJsNonce($nonce);
+		// Set `worker-src` explicitly because otherwise browsers fallback to the value of `script-src`.
+		$policy->addAllowedWorkerSrcDomain("'none'");
 
-		if (\count($nodes) === 0) {
-			return new DataResponse([], Http::STATUS_NOT_FOUND);
-		}
+		$policy->allowInlineStyle();
+		$policy->addAllowedImageDomain('data:');
 
-		$node = array_pop($nodes);
-		if (!$node instanceof File) {
-			return new DataResponse([], Http::STATUS_NOT_FOUND);
-		}
+		$policy->addAllowedFormActionDomain("'none'");
 
-		$path = $node->getStorage()->getLocalFile($node->getInternalPath());
-		if ($path === false) {
-			return new DataResponse([], Http::STATUS_NOT_FOUND);
-		}
+		$policy->addAllowedFrameAncestorDomain("'self'");
 
-		try {
-			$resultPath = $this->conversionService->convert($path);
-		} catch (ConversionException $e) {
-			$this->logger->warning($e->getMessage(), ['exception' => $e]);
-			return new DataResponse([], Http::STATUS_INTERNAL_SERVER_ERROR);
-		}
+		$scriptUrl = $this->urlGenerator->linkTo(Application::APP_ID, 'js/files_emailviewer-render-frame.js', [
+			// a new URL for each version of the app, so that browsers do not use the script of an old version
+			'v' => $this->appManager->getAppVersion(Application::APP_ID),
+		]);
 
-		$response = new StreamResponse($resultPath);
-		$response->addHeader('Content-Type', 'application/pdf');
-
+		$response = new TemplateResponse(Application::APP_ID, 'render-frame-page', [
+			'scriptUrl' => $scriptUrl,
+			'nonce' => $nonce,
+		], TemplateResponse::RENDER_AS_BLANK);
+		$response->setContentSecurityPolicy($policy);
 		return $response;
 	}
 }

@@ -1,0 +1,89 @@
+# SPDX-FileCopyrightText: 2026 Nextcloud GmbH and Nextcloud contributors
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+# Cases for sanitizing HTML: which elements, attributes and links are removed or kept.
+
+- description: keep safe HTML
+  raw: '<p class="note"><b>Hello</b> <i>world</i></p>'
+  sanitized: '<p class="note"><b>Hello</b> <i>world</i></p>'
+
+- description: remove script
+  raw: "<p>Hello</p><script>alert(1)</script>"
+  sanitized: '<p>Hello</p>'
+
+- description: remove event handler
+  raw: '<p onclick="alert(1)">Hello</p>'
+  sanitized: '<p>Hello</p>'
+
+- description: keep only the content of the body
+  raw: '<!DOCTYPE html><html><head><title>Title</title></head><body bgcolor="#eeeeee" style="margin: 0"><p>Hello</p></body></html>'
+  sanitized: '<p>Hello</p>'
+
+- description: remove SVG
+  raw: '<svg><image href="https://example.com/image.png"></image></svg>'
+  sanitized: ''
+
+- description: remove form, keep its fields
+  raw: '<form action="https://example.com/"><input name="password"><button>Log in</button></form>'
+  sanitized: '<input name="password"><button>Log in</button>'
+
+- description: remove template
+  raw: '<p>Hello</p><template><p>Hidden</p></template>'
+  sanitized: '<p>Hello</p>'
+
+- description: remove style element in head
+  raw: "<html><head><style>p { color: red; }</style></head><body><p>Hello</p></body></html>"
+  sanitized: '<p>Hello</p>'
+
+- description: remove style element in body
+  raw: "<p>Hello</p><style>p { color: red; }</style>"
+  sanitized: '<p>Hello</p>'
+
+# links, only to web pages and email addresses
+
+- description: keep web link
+  raw: '<a href="https://example.com/">Link</a>'
+  sanitized: '<a href="https://example.com/">Link</a>'
+
+- description: keep uppercase web link
+  raw: '<a href="HTTPS://example.com/">Link</a>'
+  sanitized: '<a href="HTTPS://example.com/">Link</a>'
+
+- description: keep email link
+  raw: '<a href="mailto:alice@example.com">Alice</a>'
+  sanitized: '<a href="mailto:alice@example.com">Alice</a>'
+
+- description: keep link without its whitespace
+  raw: '<a href="  https://example.com/ ">Link</a>'
+  sanitized: '<a href="https://example.com/">Link</a>'
+
+- description: remove JavaScript link
+  raw: '<a href="javascript:alert(1)">Link</a>'
+  sanitized: '<a>Link</a>'
+
+- description: remove FTP link
+  raw: '<a href="ftp://example.com/file.txt">File</a>'
+  sanitized: '<a>File</a>'
+
+- description: remove relative link
+  raw: '<a href="/logout">Link</a>'
+  sanitized: '<a>Link</a>'
+
+- description: remove link of image map
+  raw: '<map name="map"><area href="https://example.com/"></map>'
+  sanitized: '<map name="map"><area></map>'
+
+# URLs in CSS stay, as the Content Security Policy of the render page blocks them
+
+- description: keep external URL in style attribute
+  raw: '<p style="color: red; background: url(https://example.com/background.png)">Hello</p>'
+  sanitized: '<p style="color: red; background: url(https://example.com/background.png)">Hello</p>'
+
+# any URL in `background` and `poster`, so that the `data:` URLs of inline attachments are kept, see inlineResources.yaml
+- description: keep data URL in background attribute
+  raw: '<table background="data:image/png;base64,iVBORw=="><tr><td>Hello</td></tr></table>'
+  sanitized: '<table background="data:image/png;base64,iVBORw=="><tbody><tr><td>Hello</td></tr></tbody></table>'
+
+- description: remove image source set
+  raw: '<img src="data:image/png;base64,iVBORw==" srcset="https://example.com/logo.png 2x">'
+  sanitized: '<img src="data:image/png;base64,iVBORw==">'

@@ -1,0 +1,42 @@
+--- a/.github/workflows/node-test.yml
++++ b/.github/workflows/node-test.yml
+@@ -44,6 +44,8 @@
+               - '__tests__/**'
+               - '__mocks__/**'
+               - 'src/**'
++              - 'tests/javascript/**'
++              - 'tests/fixtures/**'
+               - 'appinfo/info.xml'
+               - 'package.json'
+               - 'package-lock.json'
+@@ -77,14 +79,26 @@
+         run: npm i -g 'npm@${{ steps.versions.outputs.package-manager-version }}'
+ 
+       - name: Install dependencies & build
+-        env:
+-          CYPRESS_INSTALL_BINARY: 0
+         run: |
+           npm ci
+-          npm run build --if-present
++          npm run build
+ 
+       - name: Test
+-        run: npm run test --if-present
++        run: npm run test
++
++      - name: Install Playwright browser
++        run: npx playwright install --with-deps chromium
++
++      - name: Test in browser
++        run: npm run test:browser
++
++      - name: Upload browser test results
++        if: failure()
++        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
++        with:
++          name: playwright-output
++          path: tests/output/playwright/
++          retention-days: 7
+ 
+       - name: Test and process coverage
+         run: npm run test:coverage --if-present

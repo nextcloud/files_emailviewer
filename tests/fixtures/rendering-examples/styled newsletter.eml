@@ -1,0 +1,20 @@
+From: Newsletter <news@example.com>
+To: Bob <bob@example.com>
+Subject: Monthly newsletter
+Date: Thu, 01 Oct 2026 10:00:00 +0200
+Content-Type: text/html; charset=utf-8
+
+<html><head><style>
+body { font-family: Georgia, serif; color: #333333; }
+.box { background: #336699; color: white; padding: 16px; }
+h1 { font-size: 24px; }
+td { border: 1px solid #cccccc; padding: 4px; }
+</style></head>
+<body>
+<h1>Monthly newsletter</h1>
+<div class="box">Styled box with a background</div>
+<p>Normal <b>bold</b> <i>italic</i> <a href="https://example.com/">link</a> <code>code</code></p>
+<table><tr><td>Cell 1</td><td>Cell 2</td></tr><tr><td>Cell 3</td><td>Cell 4</td></tr></table>
+<ul><li>First item</li><li>Second item</li></ul>
+<p>Grüße äöü</p>
+</body></html>

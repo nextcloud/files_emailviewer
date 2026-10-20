@@ -7,28 +7,25 @@ SPDX-License-Identifier: CC0-1.0
 
 [![REUSE status](https://api.reuse.software/badge/github.com/nextcloud/files_emailviewer)](https://api.reuse.software/info/github.com/nextcloud/files_emailviewer)
 
-Email Viewer integrates the excellent [Email to PDF Converter](https://github.com/nickrussler/email-to-pdf-converter) into Nextcloud, enabling you to view .msg and .eml files.
+Email Viewer lets you view `.eml` and `.msg` files in Nextcloud. It renders the email as a PDF in your browser and opens it in the PDF Viewer.
 
 ## Requirements
 
 - Nextcloud 34 or newer
 - Viewer and PDF Viewer for Nextcloud
-- [PHP proc_open](https://www.php.net/manual/en/function.proc-open.php)
-- [Email to PDF Converter](https://github.com/nickrussler/email-to-pdf-converter) (requires OpenJDK and [wkhtmltopdf](https://wkhtmltopdf.org/))
 
 ## Installation
 
 - Download and enable files_emailviewer
-- Store a copy of the Email to PDF Converter on the server, ensuring that Nextcloud has access to it.
-- Set the path to Email to PDF Converter via `occ config:app:set --value /opt/emailconverter-3.0.0-all.jar files_emailviewer binary_path`.
-- Upload a .msg or .eml file and view it directly in Nextcloud 🙌
+- Upload a `.eml` or `.msg` file and view it directly in Nextcloud 🙌
 
-## Outgoing connections
+## Limitations
 
-- If the email contains images from external sources, the Email to PDF converter will download the images, requiring external connections.
-- The current version does not consider Nextcloud's proxy configuration but should follow the system default.
+- **Images from the internet are not shown.** Only images that are part of the email itself are shown.
+- **Interactive content is removed.** Forms and similar content do not appear.
+- **Some `.msg` files show no text.** Outlook can save the text of an email in its "Rich Text" format. This format is not supported, so a note is shown instead of the text. Other `.msg` files are shown as usual.
+- **Attachments are only listed.** The PDF names the attachments, but they cannot be opened from it.
 
-## Building the app
+## Development
 
-	npm ci
-	npm run build
+See [DEVELOPMENT.md](DEVELOPMENT.md) for how to build and test the app and how it renders emails.

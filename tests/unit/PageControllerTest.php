@@ -7,148 +7,76 @@ declare(strict_types=1);
  * SPDX-License-Identifier: AGPL-3.0-or-later
  */
 
+use OC\AppFramework\Middleware\Security\CSPMiddleware;
+use OC\Security\CSP\ContentSecurityPolicyNonceManager;
 use OCA\Files_EmailViewer\Controller\PageController;
-use OCA\Files_EmailViewer\Exception\ConversionException;
-use OCA\Files_EmailViewer\Service\ConversionService;
-use OCA\Files_EmailViewer\Service\SetupService;
-use OCP\AppFramework\Http;
-use OCP\Files\File;
-use OCP\Files\Folder;
-use OCP\Files\IRootFolder;
-use OCP\Files\Storage\IStorage;
+use OCP\App\IAppManager;
+use OCP\AppFramework\Http\TemplateResponse;
 use OCP\IRequest;
+use OCP\IURLGenerator;
+use OCP\Server;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 class PageControllerTest extends TestCase {
 
 	private IRequest|MockObject $request;
-	private SetupService|MockObject $setupService;
-	private IRootFolder|MockObject $rootFolder;
-	private ConversionService|MockObject $conversionService;
+	private IURLGenerator|MockObject $urlGenerator;
+	private IAppManager|MockObject $appManager;
+	private ContentSecurityPolicyNonceManager|MockObject $nonceManager;
 	private PageController $pageController;
 
 	protected function setUp(): void {
 		$this->request = $this->createMock(IRequest::class);
-		$this->setupService = $this->createMock(SetupService::class);
-		$this->rootFolder = $this->createMock(IRootFolder::class);
-		$this->conversionService = $this->createMock(ConversionService::class);
+		$this->urlGenerator = $this->createMock(IURLGenerator::class);
+		$this->appManager = $this->createMock(IAppManager::class);
+		$this->nonceManager = $this->createMock(ContentSecurityPolicyNonceManager::class);
 
 		$this->pageController = new PageController(
 			$this->request,
-			'alice',
-			$this->setupService,
-			$this->rootFolder,
-			$this->conversionService,
-			new \Psr\Log\NullLogger()
+			$this->urlGenerator,
+			$this->appManager,
+			$this->nonceManager,
 		);
 	}
 
-	public function testCovertNotReady(): void {
-		$this->setupService->method('isReady')
-			->willReturn(false);
+	public function testRenderIsBlankWithTheScriptOfTheVersion(): void {
+		$this->appManager->method('getAppVersion')
+			->willReturn('1.2.3');
+		$this->urlGenerator->method('linkTo')
+			->willReturnCallback(static fn (string $app, string $file, array $args): string
+				=> '/apps/' . $app . '/' . $file . '?v=' . $args['v']);
+		$this->nonceManager->method('getNonce')
+			->willReturn('nonce-of-nextcloud');
 
-		$response = $this->pageController->convert(100);
+		$response = $this->pageController->getRenderFramePage();
 
+		$this->assertEquals(TemplateResponse::RENDER_AS_BLANK, $response->getRenderAs());
+		$this->assertEquals('nonce-of-nextcloud', $response->getParams()['nonce']);
 		$this->assertEquals(
-			Http::STATUS_NOT_IMPLEMENTED,
-			$response->getStatus(),
+			'/apps/files_emailviewer/js/files_emailviewer-render-frame.js?v=1.2.3',
+			$response->getParams()['scriptUrl'],
 		);
 	}
 
-	public function testCovertNotFoundNoNode(): void {
-		$userFolder = $this->createMock(Folder::class);
-		$userFolder->method('getById')
-			->willReturn([]);
-
-		$this->setupService->method('isReady')
-			->willReturn(true);
-		$this->rootFolder->method('getUserFolder')
-			->willReturn($userFolder);
-
-		$response = $this->pageController->convert(100);
+	public function testRenderSendsOnlyTheStrictPolicy(): void {
+		$this->nonceManager->method('getNonce')
+			->willReturn('a-nonce');
+		$response = $this->pageController->getRenderFramePage();
+		$cspMiddleware = Server::get(CSPMiddleware::class);
+		$response = $cspMiddleware->afterController($this->pageController, 'getRenderFramePage', $response);
 
 		$this->assertEquals(
-			Http::STATUS_NOT_FOUND,
-			$response->getStatus(),
-		);
-	}
-
-	public function testCovertNotFoundWrongNode(): void {
-		$node = $this->createMock(Folder::class);
-
-		$userFolder = $this->createMock(Folder::class);
-		$userFolder->method('getById')
-			->willReturn([$node]);
-
-		$this->setupService->method('isReady')
-			->willReturn(true);
-		$this->rootFolder->method('getUserFolder')
-			->willReturn($userFolder);
-
-		$response = $this->pageController->convert(100);
-
-		$this->assertEquals(
-			Http::STATUS_NOT_FOUND,
-			$response->getStatus(),
-		);
-	}
-
-	public function testCovertNotFoundNoLocalFile(): void {
-		$storage = $this->createMock(IStorage::class);
-		$storage->method('getLocalFile')
-			->willReturn(false);
-
-		$node = $this->createMock(File::class);
-		$node->method('getStorage')
-			->willReturn($storage);
-		$node->method('getInternalPath')
-			->willReturn('welcome.eml');
-
-		$userFolder = $this->createMock(Folder::class);
-		$userFolder->method('getById')
-			->willReturn([$node]);
-
-		$this->setupService->method('isReady')
-			->willReturn(true);
-		$this->rootFolder->method('getUserFolder')
-			->willReturn($userFolder);
-
-		$response = $this->pageController->convert(100);
-
-		$this->assertEquals(
-			Http::STATUS_NOT_FOUND,
-			$response->getStatus(),
-		);
-	}
-
-	public function testCovertServerError(): void {
-		$storage = $this->createMock(IStorage::class);
-		$storage->method('getLocalFile')
-			->willReturn('/tmp/welcome.eml');
-
-		$node = $this->createMock(File::class);
-		$node->method('getStorage')
-			->willReturn($storage);
-		$node->method('getInternalPath')
-			->willReturn('welcome.eml');
-
-		$userFolder = $this->createMock(Folder::class);
-		$userFolder->method('getById')
-			->willReturn([$node]);
-
-		$this->setupService->method('isReady')
-			->willReturn(true);
-		$this->rootFolder->method('getUserFolder')
-			->willReturn($userFolder);
-		$this->conversionService->method('convert')
-			->willThrowException(new ConversionException());
-
-		$response = $this->pageController->convert(100);
-
-		$this->assertEquals(
-			Http::STATUS_INTERNAL_SERVER_ERROR,
-			$response->getStatus(),
+			"default-src 'none';"
+			. "base-uri 'none';"
+			. "manifest-src 'self';"
+			. "script-src 'nonce-a-nonce';"
+			. "style-src  'unsafe-inline';"
+			. 'img-src data:;'
+			. "frame-ancestors 'self';"
+			. "worker-src 'none';"
+			. "form-action 'none'",
+			$response->getHeaders()['Content-Security-Policy'],
 		);
 	}
 }
