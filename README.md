@@ -11,7 +11,7 @@ Email Viewer lets you view `.eml` and `.msg` files in Nextcloud. It renders the 
 
 ## Requirements
 
-- Nextcloud 34 or newer
+- Nextcloud 28 or newer
 - Viewer and PDF Viewer for Nextcloud
 
 ## Installation

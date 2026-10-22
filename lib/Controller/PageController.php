@@ -17,6 +17,7 @@ use OCP\AppFramework\Http\Attribute\NoCSRFRequired;
 use OCP\AppFramework\Http\Attribute\PublicPage;
 use OCP\AppFramework\Http\EmptyContentSecurityPolicy;
 use OCP\AppFramework\Http\TemplateResponse;
+use OCP\IConfig;
 use OCP\IRequest;
 use OCP\IURLGenerator;
 
@@ -26,6 +27,7 @@ class PageController extends Controller {
 		private IURLGenerator $urlGenerator,
 		private IAppManager $appManager,
 		private ContentSecurityPolicyNonceManager $nonceManager,
+		private IConfig $config,
 	) {
 		parent::__construct(Application::APP_ID, $request);
 	}
@@ -46,7 +48,9 @@ class PageController extends Controller {
 		// The resulting CSP still only allows the nonced script,
 		// because `#buildPolicy` drops `'self'` when a nonce is provided.
 		$policy->addAllowedScriptDomain("'self'");
-		$policy->useJsNonce($nonce);
+		// Before Nextcloud 30, `#getNonce` returns the nonce base64-encoded and `#buildPolicy` encodes it again.
+		$isBeforeNextcloud30 = version_compare($this->config->getSystemValueString('version'), '30', '<');
+		$policy->useJsNonce($isBeforeNextcloud30 ? base64_decode($nonce) : $nonce);
 		// Set `worker-src` explicitly because otherwise browsers fallback to the value of `script-src`.
 		$policy->addAllowedWorkerSrcDomain("'none'");
 

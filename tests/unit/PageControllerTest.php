@@ -12,6 +12,7 @@ use OC\Security\CSP\ContentSecurityPolicyNonceManager;
 use OCA\Files_EmailViewer\Controller\PageController;
 use OCP\App\IAppManager;
 use OCP\AppFramework\Http\TemplateResponse;
+use OCP\IConfig;
 use OCP\IRequest;
 use OCP\IURLGenerator;
 use OCP\Server;
@@ -24,6 +25,7 @@ class PageControllerTest extends TestCase {
 	private IURLGenerator|MockObject $urlGenerator;
 	private IAppManager|MockObject $appManager;
 	private ContentSecurityPolicyNonceManager|MockObject $nonceManager;
+	private IConfig|MockObject $config;
 	private PageController $pageController;
 
 	protected function setUp(): void {
@@ -31,12 +33,14 @@ class PageControllerTest extends TestCase {
 		$this->urlGenerator = $this->createMock(IURLGenerator::class);
 		$this->appManager = $this->createMock(IAppManager::class);
 		$this->nonceManager = $this->createMock(ContentSecurityPolicyNonceManager::class);
+		$this->config = $this->createMock(IConfig::class);
 
 		$this->pageController = new PageController(
 			$this->request,
 			$this->urlGenerator,
 			$this->appManager,
 			$this->nonceManager,
+			$this->config,
 		);
 	}
 
@@ -60,6 +64,9 @@ class PageControllerTest extends TestCase {
 	}
 
 	public function testRenderSendsOnlyTheStrictPolicy(): void {
+		$this->config->method('getSystemValueString')
+			->with('version')
+			->willReturn('34.0.0.0');
 		$this->nonceManager->method('getNonce')
 			->willReturn('a-nonce');
 		$response = $this->pageController->getRenderFramePage();
@@ -77,6 +84,22 @@ class PageControllerTest extends TestCase {
 			. "worker-src 'none';"
 			. "form-action 'none'",
 			$response->getHeaders()['Content-Security-Policy'],
+		);
+	}
+
+	public function testRenderDecodesTheNonceBeforeNextcloud30(): void {
+		$this->config->method('getSystemValueString')
+			->with('version')
+			->willReturn('29.0.16.1');
+		$this->nonceManager->method('getNonce')
+			->willReturn(base64_encode('a-nonce'));
+
+		$response = $this->pageController->getRenderFramePage();
+
+		$this->assertEquals(base64_encode('a-nonce'), $response->getParams()['nonce']);
+		$this->assertStringContainsString(
+			"script-src 'nonce-a-nonce';",
+			$response->getContentSecurityPolicy()->buildPolicy(),
 		);
 	}
 }
