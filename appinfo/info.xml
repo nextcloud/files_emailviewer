@@ -14,7 +14,7 @@ It renders the email as a PDF in your browser and opens it in the PDF Viewer.
 
 #### Requirements
 
-- Nextcloud 34 or newer
+- Nextcloud 28 or newer
 - Viewer and PDF Viewer for Nextcloud
 
 #### Installation
@@ -38,6 +38,6 @@ It renders the email as a PDF in your browser and opens it in the PDF Viewer.
     <bugs>https://github.com/nextcloud/files_emailviewer/issues</bugs>
     <dependencies>
 	<php min-version="8.2" max-version="8.5" />
-    <nextcloud min-version="34" max-version="35"/>
+    <nextcloud min-version="28" max-version="35"/>
     </dependencies>
 </info>
