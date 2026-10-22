@@ -34,7 +34,7 @@ export async function renderPdf(element: HTMLElement): Promise<Blob> {
 }
 
 /**
- * Create sandboxed frame to attach the mail content too.
+ * Create a sandboxed frame to attach the mail content to.
  *
  * @return loaded frame with an empty body, for the email
  */

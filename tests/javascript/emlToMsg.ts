@@ -4,7 +4,7 @@
  */
 
 /*
- * Smoke test helper: extracts an `.eml` test case and writes the result as `.msg` file,
+ * Smoke test helper: extracts an `.eml` test case and writes the result as an `.msg` file,
  * so that the `.eml` test cases also run for the `.msg` extraction.
  *
  * This is not a general conversion, it is only useful for smoke testing with the existing test cases.

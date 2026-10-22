@@ -51,7 +51,7 @@ class PageController extends Controller {
 		// Before Nextcloud 30, `#getNonce` returns the nonce base64-encoded and `#buildPolicy` encodes it again.
 		$isBeforeNextcloud30 = version_compare($this->config->getSystemValueString('version'), '30', '<');
 		$policy->useJsNonce($isBeforeNextcloud30 ? base64_decode($nonce) : $nonce);
-		// Set `worker-src` explicitly because otherwise browsers fallback to the value of `script-src`.
+		// Set `worker-src` explicitly because otherwise browsers fall back to the value of `script-src`.
 		$policy->addAllowedWorkerSrcDomain("'none'");
 
 		$policy->allowInlineStyle();

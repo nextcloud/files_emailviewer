@@ -61,7 +61,7 @@ sequenceDiagram
 	App->>RenderPage: renders the email
 	RenderPage->>EmailFrame: lays the email out
 	RenderPage->>Snapdom: draws the email into a PDF
-	Snapdom->>EmailFrame: captures the email as image
+	Snapdom->>EmailFrame: captures the email as an image
 	Snapdom->>PluginFrame: measures the text and links of the capture
 	Snapdom-->>RenderPage: PDF
 	RenderPage-->>App: PDF
@@ -103,7 +103,7 @@ Emails are untrusted. Attacks and their mitigations:
   - The Content Security Policy of the render page only allows its own script.
   - The email frame is sandboxed without `allow-scripts`.
 - **HTTP leaks**
-  - URLs in `src`, `background` and `poster` are emptied, besides `data:` URLs and inline attachments.
+  - URLs in `src`, `background` and `poster` are emptied, except `data:` URLs and inline attachments.
   - `<style>` elements are removed.
   - The Content Security Policy blocks all other external resources.
 - **Harmful links**
