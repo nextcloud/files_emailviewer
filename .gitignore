@@ -10,3 +10,5 @@
 /tests/.phpunit.result.cache
 /vendor-bin/**/vendor/
 /vendor/
+/.vitest/
+/tests/output

@@ -1,0 +1,196 @@
+# SPDX-FileCopyrightText: 2026 Nextcloud GmbH and Nextcloud contributors
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+# Cases for extracting the body of an email, and for emails whose body cannot be extracted.
+
+- description: plain text
+  eml: "Content-Type: text/plain; charset=utf-8\r\n\
+    \r\n\
+    Hello äöü\r\n\
+    "
+  expectedBody:
+    plain: "Hello äöü\n"
+
+- description: quoted-printable HTML
+  eml: "Content-Type: text/html; charset=utf-8\r\n\
+    Content-Transfer-Encoding: quoted-printable\r\n\
+    \r\n\
+    <p>Hello =C3=A4=C3=B6=\r\n\
+    =C3=BC</p>\r\n\
+    "
+  expectedBody:
+    html: "<p>Hello äöü</p>\n"
+
+- description: HTML and plain text alternative
+  eml: "Content-Type: multipart/alternative; boundary=\"BOUNDARY\"\r\n\
+    \r\n\
+    --BOUNDARY\r\n\
+    \r\n\
+    Plain text\r\n\
+    --BOUNDARY\r\n\
+    Content-Type: text/html\r\n\
+    \r\n\
+    <p>HTML</p>\r\n\
+    --BOUNDARY--\r\n\
+    "
+  expectedBody:
+    html: "<p>HTML</p>"
+
+- description: mixed HTML and plain text parts
+  eml: "Content-Type: multipart/mixed; boundary=\"BOUNDARY\"\r\n\
+    \r\n\
+    --BOUNDARY\r\n\
+    \r\n\
+    Plain reply\r\n\
+    --BOUNDARY\r\n\
+    Content-Type: text/html\r\n\
+    \r\n\
+    <p>HTML original</p>\r\n\
+    --BOUNDARY\r\n\
+    \r\n\
+    Plain footer <not a tag>\r\n\
+    --BOUNDARY--\r\n\
+    "
+  expectedBody:
+    html: |-
+      <div>Plain reply</div>
+      <p>HTML original</p>
+      <div>Plain footer &#x3C;not a tag&#x3E;</div>
+
+- description: ISO-8859-1 plain text
+  eml: "Content-Type: text/plain; charset=iso-8859-1\r\n\
+    Content-Transfer-Encoding: quoted-printable\r\n\
+    \r\n\
+    Gr=FC=DFe\r\n\
+    "
+  expectedBody:
+    plain: "Grüße\n"
+
+- description: HTML attachment
+  eml: "Content-Type: multipart/mixed; boundary=\"BOUNDARY\"\r\n\
+    \r\n\
+    --BOUNDARY\r\n\
+    \r\n\
+    Hello\r\n\
+    --BOUNDARY\r\n\
+    Content-Type: text/html\r\n\
+    Content-Disposition: attachment\r\n\
+    \r\n\
+    <p>Attached page</p>\r\n\
+    --BOUNDARY--\r\n\
+    "
+  expectedBody:
+    plain: "Hello"
+
+- description: forwarded email attachment
+  eml: "Content-Type: multipart/mixed; boundary=\"BOUNDARY\"\r\n\
+    \r\n\
+    --BOUNDARY\r\n\
+    \r\n\
+    Hello\r\n\
+    --BOUNDARY\r\n\
+    Content-Type: message/rfc822\r\n\
+    Content-Disposition: attachment\r\n\
+    \r\n\
+    Subject: Forwarded\r\n\
+    \r\n\
+    Forwarded body\r\n\
+    --BOUNDARY--\r\n\
+    "
+  expectedBody:
+    plain: "Hello"
+
+- description: inline forwarded email
+  eml: "Content-Type: multipart/mixed; boundary=\"BOUNDARY\"\r\n\
+    \r\n\
+    --BOUNDARY\r\n\
+    \r\n\
+    Hello\r\n\
+    --BOUNDARY\r\n\
+    Content-Type: message/rfc822\r\n\
+    \r\n\
+    Subject: Forwarded\r\n\
+    \r\n\
+    Forwarded body\r\n\
+    --BOUNDARY--\r\n\
+    "
+  expectedBody:
+    plain: |
+      Hello
+
+      ------------------
+      Subject: Forwarded
+      ------------------
+
+      Forwarded body
+
+- description: no body
+  eml: "Content-Type: multipart/mixed; boundary=\"BOUNDARY\"\r\n\
+    \r\n\
+    --BOUNDARY\r\n\
+    Content-Disposition: attachment\r\n\
+    \r\n\
+    data\r\n\
+    --BOUNDARY--\r\n\
+    "
+  error: Email has neither an HTML nor a plain text body
+
+- description: empty file
+  eml: ""
+  error: Email has neither an HTML nor a plain text body
+
+- description: HTML and plain text
+  msg: parsing-examples/EmailWithAttachments.msg
+  expectedBody:
+    html: |-
+      <html>
+         <head>
+            <title>Peter Pann</title>
+         </head>
+         <body>
+            <b>Hello Neverland html</b><br/>
+           <img src="tinkerbell.jpg">
+         </body>
+      </html>
+
+- description: binary HTML in the code page of the email, not UTF-8 as its meta tag claims
+  msg: parsing-examples/HTMLBodyBinary_CP1251.msg
+  expectedBody:
+    html: '<!DOCTYPE html><html><meta charset=\"utf-8\"><body>HTML автоматически</body></html>'
+
+- description: non-Unicode plain text in the ANSI code page of the locale
+  msg: parsing-examples/nonUnicodeCP932.msg
+  expectedBody:
+    plain: "日本語 Non Unicode 本文\n"
+
+- description: plain text and compressed RTF
+  msg: parsing-examples/HTML mail with replyto and attachment and embedded image.msg
+  expectedBody:
+    plain: "We should meet up!\n"
+
+- description: plain text and compressed RTF without HTML
+  msg: parsing-examples/simple sent.msg
+  expectedBody:
+    plain: |
+      Dear BitDaddys Corp.,
+
+      We have added your software to our approved list.
+
+      Thank you for your efforts,
+      Sincerely,
+      John Doe
+      Some Server Company
+
+# Unusual but possible: Outlook normally stores a plain text body next to the compressed RTF,
+# but MS-OXBBODY lists messages with only `PidTagRtfCompressed` as a valid case (best body algorithm, row 9.2).
+# https://learn.microsoft.com/en-us/openspecs/exchange_server_protocols/ms-oxbbody/1d211dcd-2896-4b9a-bcdb-a2b5763a57f4
+- description: only compressed RTF
+  msg: parsing-examples/compressed RTF only.msg
+  expectedBody:
+    plain: >-
+      The body of this email is only stored as compressed RTF, which is not supported.
+      The email has no HTML or plain text version of the body to show instead.
+
+- description: encrypted message
+  msg: parsing-examples/S_MIME test message encrypted.msg
+  error: Email has neither an HTML nor a plain text body

@@ -10,7 +10,6 @@ declare(strict_types=1);
 namespace OCA\Files_EmailViewer\AppInfo;
 
 use OCA\Files_EmailViewer\Listeners\LoadViewerListener;
-use OCA\Files_EmailViewer\SetupChecks\EmailViewer;
 use OCA\Viewer\Event\LoadViewer;
 use OCP\AppFramework\App;
 use OCP\AppFramework\Bootstrap\IBootContext;
@@ -26,7 +25,6 @@ class Application extends App implements IBootstrap {
 
 	public function register(IRegistrationContext $context): void {
 		$context->registerEventListener(LoadViewer::class, LoadViewerListener::class);
-		$context->registerSetupCheck(EmailViewer::class);
 	}
 
 	public function boot(IBootContext $context): void {

@@ -10,7 +10,6 @@ declare(strict_types=1);
 namespace OCA\Files_EmailViewer\Listeners;
 
 use OCA\Files_EmailViewer\AppInfo\Application;
-use OCA\Files_EmailViewer\Service\SetupService;
 use OCA\Viewer\Event\LoadViewer;
 use OCP\EventDispatcher\Event;
 use OCP\EventDispatcher\IEventListener;
@@ -20,14 +19,8 @@ use OCP\Util;
  * @template-implements IEventListener<LoadViewer|Event>
  */
 class LoadViewerListener implements IEventListener {
-
-	public function __construct(
-		private SetupService $setupService,
-	) {
-	}
-
 	public function handle(Event $event): void {
-		if ($event instanceof LoadViewer && $this->setupService->isReady()) {
+		if ($event instanceof LoadViewer) {
 			Util::addScript(
 				Application::APP_ID,
 				'files_emailviewer-main',

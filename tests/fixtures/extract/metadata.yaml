@@ -1,0 +1,155 @@
+# SPDX-FileCopyrightText: 2026 Nextcloud GmbH and Nextcloud contributors
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+# Cases for extracting the subject, the addresses and the date of an email.
+
+- description: subject, from, to and date
+  eml: "From: Alice <alice@example.com>\r\n\
+    To: Bob <bob@example.com>\r\n\
+    Subject: Hello Bob\r\n\
+    Date: Thu, 01 Oct 2026 10:00:00 +0200\r\n\
+    \r\n\
+    Hello\r\n\
+    "
+  expectedMetadata:
+    subject: Hello Bob
+    from: { name: Alice, address: alice@example.com }
+    to:
+      - { name: Bob, address: bob@example.com }
+    sentDate: "2026-10-01T08:00:00.000Z"
+
+- description: no headers
+  eml: "\r\n\
+    Hello\r\n\
+    "
+  expectedMetadata:
+    subject: null
+    from: null
+    to: []
+    cc: []
+    sentDate: null
+
+- description: encoded subject
+  eml: "Subject: =?UTF-8?Q?Gr=C3=BC=C3=9Fe?=\r\n\
+    \r\n\
+    Hello\r\n\
+    "
+  expectedMetadata:
+    subject: Grüße
+
+- description: cc with and without display name
+  eml: "Cc: Carol <carol@example.com>, dave@example.com\r\n\
+    \r\n\
+    Hello\r\n\
+    "
+  expectedMetadata:
+    cc:
+      - { name: Carol, address: carol@example.com }
+      - { name: null, address: dave@example.com }
+
+- description: address group
+  eml: "To: Team: Erin <erin@example.com>, frank@example.com;\r\n\
+    \r\n\
+    Hello\r\n\
+    "
+  expectedMetadata:
+    to:
+      - { name: Erin, address: erin@example.com }
+      - { name: null, address: frank@example.com }
+
+- description: invalid date
+  eml: "Date: not a date\r\n\
+    \r\n\
+    Hello\r\n\
+    "
+  expectedMetadata:
+    sentDate: null
+
+- description: date in GMT without seconds
+  eml: "Date: 1 Oct 2026 08:00 GMT\r\n\
+    \r\n\
+    Hello\r\n\
+    "
+  expectedMetadata:
+    sentDate: "2026-10-01T08:00:00.000Z"
+
+- description: whitespace-only subject
+  eml: "Subject:   \r\n\
+    \r\n\
+    Hello\r\n\
+    "
+  expectedMetadata:
+    subject: null
+
+- description: encoded display name
+  eml: "From: =?UTF-8?B?SsO8cmdlbiBNw7xsbGVy?= <juergen@example.com>\r\n\
+    \r\n\
+    Hello\r\n\
+    "
+  expectedMetadata:
+    from: { name: Jürgen Müller, address: juergen@example.com }
+
+- description: multiple from addresses
+  eml: "From: Alice <alice@example.com>, Bob <bob@example.com>\r\n\
+    \r\n\
+    Hello\r\n\
+    "
+  expectedMetadata:
+    from: { name: Alice, address: alice@example.com }
+
+- description: address group in from
+  eml: "From: Team: Erin <erin@example.com>;\r\n\
+    \r\n\
+    Hello\r\n\
+    "
+  expectedMetadata:
+    from: { name: Erin, address: erin@example.com }
+
+- description: empty address group in from
+  eml: "From: Undisclosed:;\r\n\
+    \r\n\
+    Hello\r\n\
+    "
+  expectedMetadata:
+    from: null
+
+- description: subject and sent date
+  msg: parsing-examples/simple sent.msg
+  expectedMetadata:
+    subject: (outlookEMLandMSGconverter Trial Version Import) BitDaddys Software
+    sentDate: "2006-08-12T18:25:25.000Z"
+
+- description: SMTP and Exchange address
+  msg: parsing-examples/embedded image.msg
+  expectedMetadata:
+    from: { name: "Paliarik, Martin", address: mpaliarik@mdlz.com }
+    to:
+      - { name: "Paliarik, Martin", address: mpaliarik@mdlz.com }
+
+- description: only Exchange address
+  msg: parsing-examples/plain chain.msg
+  expectedMetadata:
+    from: { name: "Robert Duncan /o=ANCA Enterprise/ou=Exchange Administrative Group (FYDIBOHF23SPDLT)/cn=Recipients/cn=robertd", address: null }
+
+- description: sent on behalf of someone else
+  # sent by b.bottema@gmail.com on behalf of b.bottema@projectnibble.org
+  msg: parsing-examples/HTML mail with replyto and attachment and embedded image.msg
+  expectedMetadata:
+    from: { name: Benny Bottema, address: b.bottema@gmail.com }
+
+- description: non-Unicode strings in the code page of the message
+  msg: parsing-examples/cyrillic_message.msg
+  expectedMetadata:
+    subject: Автоматический ответ подсистемы обмена данными ФГУП "Почта России".
+    to:
+      - { name: Свиридов Дмитрий Владимирович, address: sviridov@niips.ru }
+
+- description: non-Unicode strings without a code page of the message, as Latin-1
+  msg: parsing-examples/HTMLBodyBinary_CP1251.msg
+  expectedMetadata:
+    subject: Subject öäü Subject
+
+- description: non-Unicode strings in the ANSI code page of the locale, without a code page of the message
+  msg: parsing-examples/nonUnicodeCP932.msg
+  expectedMetadata:
+    subject: 日本語 Non Unicode タイトル

@@ -1,0 +1,4 @@
+SPDX-FileCopyrightText: The Apache Software Foundation
+SPDX-License-Identifier: Apache-2.0
+
+Source: https://github.com/apache/poi/blob/6eebda59e0a08cbf2aa541f07cc82abfe4fed755/test-data/hsmf/cyrillic_message.msg

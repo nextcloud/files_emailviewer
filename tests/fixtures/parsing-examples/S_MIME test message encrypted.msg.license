@@ -1,0 +1,4 @@
+SPDX-FileCopyrightText: Benny Bottema and outlook-message-parser contributors
+SPDX-License-Identifier: Apache-2.0
+
+Source: https://github.com/bbottema/outlook-message-parser/blob/c6543f8ebd1d1d972c042332826d8c0cbe6184e6/src/test/resources/test-messages/S_MIME%20test%20message%20encrypted.msg

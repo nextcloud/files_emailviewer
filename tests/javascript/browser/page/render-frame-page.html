@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<!--
+  - SPDX-FileCopyrightText: 2026 Nextcloud GmbH and Nextcloud contributors
+  - SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+<!--
+  - Stands in for the render page of the server, with its Content Security Policy, see PageController::getRenderFramePage.
+-->
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="Content-Security-Policy" content="default-src 'none'; base-uri 'none'; manifest-src 'self'; script-src 'nonce-render'; style-src 'unsafe-inline'; img-src data:; worker-src 'none'; form-action 'none'">
+		<title>Render page</title>
+	</head>
+	<body>
+		<script nonce="render" src="/render-frame.js"></script>
+	</body>
+</html>
