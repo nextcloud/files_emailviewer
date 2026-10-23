@@ -2,9 +2,10 @@ OC.L10N.register(
     "files_emailviewer",
     {
     "Email Viewer" : "E-kirjade kuvaja",
-    "Enable the php function proc_open to run the email-to-pdf converter." : "Et e-kirjade teisendamine PDF-failideks toimiks, seadista, et proc_open funktsiooni kasutamine oleks lubatud.",
-    "Java is required to run the email-to-pdf converter." : "E-kirjade teisendamiseks PDF-failideks on vajalik Java olemasolu",
-    "Please install https://github.com/nickrussler/email-to-pdf-converter and set the path via `%s`" : "Palun paigalda https://github.com/nickrussler/email-to-pdf-converter ja määratle tema asukoht „%s“ abil",
-    "View .msg and .eml files" : "Vaata .msg ja .eml faile"
+    "View .msg and .eml files" : "Vaata .msg ja .eml faile",
+    "From" : "Alates",
+    "Subject" : "Teema",
+    "Cc" : "Koopia",
+    "Date" : "Kuupäev"
 },
 "nplurals=2; plural=(n != 1);");

@@ -1,9 +1,11 @@
 { "translations": {
     "Email Viewer" : "Просмотр писем",
-    "Enable the php function proc_open to run the email-to-pdf converter." : "Включите функцию PHP proc_open, чтобы запускать преобразователь писем в PDF.",
-    "Java is required to run the email-to-pdf converter." : "Для работы преобразователя писем в PDF нужна Java.",
-    "Please install https://github.com/nickrussler/email-to-pdf-converter and set the path via `%s`" : "Установите https://github.com/nickrussler/email-to-pdf-converter и укажите путь к нему через `%s`",
     "View .msg and .eml files" : "Просмотр файлов .msg и .eml",
-    "### Email Viewer integrates the excellent Email to PDF Converter into Nextcloud, enabling you to view .msg and .eml files.\n\n#### Requirements\n\n- Nextcloud 34 or newer\n- Viewer and PDF Viewer for Nextcloud\n- PHP proc_open\n- [Email to PDF Converter](https://github.com/nickrussler/email-to-pdf-converter) (requires OpenJDK and [wkhtmltopdf](https://wkhtmltopdf.org/))\n\n#### Installation\n\n- Download and enable files_emailviewer\n- Store a copy of the Email to PDF Converter on the server, ensuring that Nextcloud has access to it\n- Set the path to Email to PDF Converter via `occ config:app:set --value /opt/emailconverter-3.0.0-all.jar files_emailviewer binary_path`\n- Upload a .msg or .eml file and view it directly in Nextcloud 🙌\n\n#### Outgoing connections\n\n- If the email contains images from external sources, the Email to PDF converter will download the images, requiring external connections\n- The current version does not consider Nextcloud's proxy configuration but should follow the system default" : "### Приложение «Просмотр писем» встраивает в Nextcloud отличный преобразователь Email to PDF Converter и позволяет просматривать файлы .msg и .eml.\n\n#### Требования\n\n- Nextcloud 34 или новее\n- Приложения Viewer и PDF Viewer для Nextcloud\n- PHP proc_open\n- [Email to PDF Converter](https://github.com/nickrussler/email-to-pdf-converter) (нужны OpenJDK и [wkhtmltopdf](https://wkhtmltopdf.org/))\n\n#### Установка\n\n- Скачайте и включите files_emailviewer\n- Сохраните копию Email to PDF Converter на сервере так, чтобы у Nextcloud был к ней доступ\n- Укажите путь к Email to PDF Converter командой `occ config:app:set --value /opt/emailconverter-3.0.0-all.jar files_emailviewer binary_path`\n- Загрузите файл .msg или .eml и просматривайте его прямо в Nextcloud 🙌\n\n#### Исходящие подключения\n\n- Если в письме есть изображения из внешних источников, Email to PDF Converter скачивает их, и для этого нужны внешние подключения\n- Текущая версия не учитывает параметры прокси Nextcloud, а использует системные по умолчанию"
+    "Attachments" : "Вложения",
+    "From" : "С языка",
+    "Subject" : "Тема",
+    "To" : "На язык",
+    "Cc" : "Копия",
+    "Date" : "Дата"
 },"pluralForm" :"nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);"
 }

@@ -1,8 +1,11 @@
 { "translations": {
     "Email Viewer" : "ئېلخەت كۆرگۈچى",
-    "Enable the php function proc_open to run the email-to-pdf converter." : "Php ئىقتىدارىنى proc_open نى قوزغىتىپ ئېلېكترونلۇق خەتتىن pdf ئايلاندۇرغۇچنى ئىجرا قىلىڭ.",
-    "Java is required to run the email-to-pdf converter." : "Java دىن ئېلېكترونلۇق خەتتىن pdf ئايلاندۇرغۇچنى ئىجرا قىلىش تەلەپ قىلىنىدۇ.",
-    "Please install https://github.com/nickrussler/email-to-pdf-converter and set the path via `%s`" : "https://github.com/nickrussler/email-to-pdf-converter نى قاچىلاپ ،`%s` ئارقىلىق يول بەلگىلەڭ.",
-    "View .msg and .eml files" : ".Mg ۋە .eml ھۆججىتىنى كۆرۈڭ"
+    "View .msg and .eml files" : ".Mg ۋە .eml ھۆججىتىنى كۆرۈڭ",
+    "Attachments" : "قوشۇمچە ھۆججەتلەر",
+    "From" : "دىن",
+    "Subject" : "تېما",
+    "To" : "غا",
+    "Cc" : "كوپىيە",
+    "Date" : "چېسلا"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }

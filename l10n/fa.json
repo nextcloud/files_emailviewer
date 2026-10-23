@@ -1,8 +1,9 @@
 { "translations": {
     "Email Viewer" : "نمایش‌دهنده ایمیل",
-    "Enable the php function proc_open to run the email-to-pdf converter." : "برای اجرای مبدل ایمیل به PDF، تابع php proc_open را فعال کنید.",
-    "Java is required to run the email-to-pdf converter." : "برای اجرای مبدل ایمیل به PDF، جاوا مورد نیاز است.",
-    "Please install https://github.com/nickrussler/email-to-pdf-converter and set the path via `%s`" : "لطفاً https://github.com/nickrussler/email-to-pdf-converter را نصب کرده و مسیر را از طریق `%s` تنظیم کنید.",
-    "View .msg and .eml files" : "مشاهده فایل‌های .msg و .eml"
+    "View .msg and .eml files" : "مشاهده فایل‌های .msg و .eml",
+    "From" : "از",
+    "Subject" : "موضوع",
+    "Cc" : "رونوشت",
+    "Date" : "تاریخ"
 },"pluralForm" :"nplurals=2; plural=(n > 1);"
 }

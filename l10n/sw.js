@@ -2,9 +2,12 @@ OC.L10N.register(
     "files_emailviewer",
     {
     "Email Viewer" : "Mtazamaji wa barua pepe",
-    "Enable the php function proc_open to run the email-to-pdf converter." : "Washa kitendakazi cha php proc_open ili kuendesha kigeuzi cha barua pepe-to-pdf.",
-    "Java is required to run the email-to-pdf converter." : "Java inahitajika ili kuendesha kigeuzi cha barua pepe hadi pdf.",
-    "Please install https://github.com/nickrussler/email-to-pdf-converter and set the path via `%s`" : "Tafadhali sakinisha https://github.com/nickrussler/email-to-pdf-converter na uweke njia kupitia `%s`",
-    "View .msg and .eml files" : "Tazama .msg na .eml za faili"
+    "View .msg and .eml files" : "Tazama .msg na .eml za faili",
+    "Attachments" : "Viambatanisho",
+    "From" : "Tangu/ kutoka",
+    "Subject" : "Somo",
+    "To" : "Mpaka/ hadi",
+    "Cc" : "Cc",
+    "Date" : "Tarehe"
 },
 "nplurals=2; plural=(n != 1);");
