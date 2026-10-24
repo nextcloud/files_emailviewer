@@ -1,0 +1,9 @@
+{ "translations": {
+    "Attachments" : "Vedlegg",
+    "From" : "Fra",
+    "Subject" : "Emne",
+    "To" : "Til",
+    "Cc" : "Kopi",
+    "Date" : "Dato"
+},"pluralForm" :"nplurals=2; plural=(n != 1);"
+}

@@ -1,0 +1,9 @@
+{ "translations": {
+    "Attachments" : "Attachments",
+    "From" : "From",
+    "Subject" : "Subject",
+    "To" : "To",
+    "Cc" : "Cc",
+    "Date" : "თარიღი"
+},"pluralForm" :"nplurals=2; plural=(n!=1);"
+}

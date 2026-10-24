@@ -1,0 +1,9 @@
+{ "translations": {
+    "Attachments" : "Viðhengi",
+    "From" : "Frá",
+    "Subject" : "Viðfangsefni",
+    "To" : "Til",
+    "Cc" : "Afrit (Cc)",
+    "Date" : "Dagsetning"
+},"pluralForm" :"nplurals=2; plural=(n % 10 != 1 || n % 100 == 11);"
+}

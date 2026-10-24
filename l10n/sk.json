@@ -1,9 +1,15 @@
 { "translations": {
     "Email Viewer" : "Prehliadač e-mailov",
     "View .msg and .eml files" : "Zobrazenie súborov .msg a .eml",
+    "### Email Viewer lets you view `.eml` and `.msg` files in Nextcloud.\n\nIt renders the email as a PDF in your browser and opens it in the PDF Viewer.\n\n#### Requirements\n\n- Nextcloud 28 or newer\n- Viewer and PDF Viewer for Nextcloud\n\n#### Installation\n\n- Download and enable files_emailviewer\n- Upload a `.eml` or `.msg` file and view it directly in Nextcloud 🙌\n\n#### Limitations\n\n- **Images from the internet are not shown.** Only images that are part of the email itself are shown.\n- **Interactive content is removed.** Forms and similar content do not appear.\n- **Some `.msg` files show no text.** Outlook can save the text of an email in its \"Rich Text\" format. This format is not supported, so a note is shown instead of the text. Other `.msg` files are shown as usual.\n- **Attachments are only listed.** The PDF names the attachments, but they cannot be opened from it." : "### Prehliadač e-mailov vám umožňuje zobrazovať súbory `.eml` a `.msg` v Nextcloude.\n\nE-mail vykreslí ako PDF vo vašom prehliadači a otvorí ho v Prehliadači PDF.\n\n#### Požiadavky\n\n- Nextcloud 28 alebo novší\n- Prehliadač a Prehliadač PDF pre Nextcloud\n\n#### Inštalácia\n\n- Stiahnite a povoľte files_emailviewer\n- Nahrajte súbor `.eml` alebo `.msg` a zobrazte ho priamo v Nextcloude 🙌\n\n#### Obmedzenia\n\n- **Obrázky z internetu sa nezobrazujú.** Zobrazujú sa iba obrázky, ktoré sú súčasťou samotného e-mailu.\n- **Interaktívny obsah sa odstráni.** Formuláre a podobný obsah sa nezobrazia.\n- **Niektoré súbory `.msg` nezobrazujú text.** Outlook môže uložiť text e-mailu vo formáte „Rich Text“. Tento formát nie je podporovaný, preto sa namiesto textu zobrazí poznámka. Ostatné súbory `.msg` sa zobrazujú obvyklým spôsobom.\n- **Prílohy sú iba uvedené v zozname.** PDF uvádza názvy príloh, ale nemožno ich z neho otvoriť.",
+    "The email cannot be shown" : "E-mail nemožno zobraziť",
+    "The file might be damaged or in a format that is not supported." : "Súbor môže byť poškodený alebo je v nepodporovanom formáte.",
+    "The body of this email is only stored as compressed RTF, which is not supported. The email has no HTML or plain text version of the body to show instead." : "Telo tohto e-mailu je uložené iba ako komprimovaný RTF, ktorý nie je podporovaný. E-mail nemá žiadnu verziu tela v HTML ani vo formáte čistého textu, ktorá by sa mohla zobraziť namiesto neho.",
     "Attachments" : "Prílohy",
+    "unnamed" : "bez názvu",
     "From" : "Od",
     "Subject" : "Predmet",
+    "(no subject)" : "(bez predmetu)",
     "To" : "Do",
     "Cc" : "Kópia",
     "Date" : "Dátum"

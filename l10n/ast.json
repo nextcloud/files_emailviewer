@@ -1,0 +1,8 @@
+{ "translations": {
+    "From" : "De",
+    "Subject" : "Asuntu",
+    "To" : "Pa",
+    "Cc" : "Cc",
+    "Date" : "Data"
+},"pluralForm" :"nplurals=2; plural=(n != 1);"
+}

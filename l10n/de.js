@@ -2,6 +2,18 @@ OC.L10N.register(
     "files_emailviewer",
     {
     "Email Viewer" : "Email-Viewer",
-    "View .msg and .eml files" : "Betrachte .msg und .eml Dateien"
+    "View .msg and .eml files" : "Betrachte .msg und .eml Dateien",
+    "### Email Viewer lets you view `.eml` and `.msg` files in Nextcloud.\n\nIt renders the email as a PDF in your browser and opens it in the PDF Viewer.\n\n#### Requirements\n\n- Nextcloud 28 or newer\n- Viewer and PDF Viewer for Nextcloud\n\n#### Installation\n\n- Download and enable files_emailviewer\n- Upload a `.eml` or `.msg` file and view it directly in Nextcloud 🙌\n\n#### Limitations\n\n- **Images from the internet are not shown.** Only images that are part of the email itself are shown.\n- **Interactive content is removed.** Forms and similar content do not appear.\n- **Some `.msg` files show no text.** Outlook can save the text of an email in its \"Rich Text\" format. This format is not supported, so a note is shown instead of the text. Other `.msg` files are shown as usual.\n- **Attachments are only listed.** The PDF names the attachments, but they cannot be opened from it." : "### Mit der E-Mail-Viewer-App können `.eml`- und `.msg`-Dateien in Nextcloud angezeigt werden.\n\nEs rendert die E-Mail als PDF in Ihrem Browser und öffnet sie im PDF Viewer.\n\n#### Anforderungen\n\n- Nextcloud 28 oder neuer\n- Viewer und PDF Viewer für Nextcloud\n\n#### Installation\n\n- files_emailviewer herunterladen und aktivieren\n- Eine `.eml`- oder `.msg`-Datei hochladen um sie direkt in Nextcloud anzuzeigen 🙌\n\n#### Einschränkungen\n\n- **Bilder aus dem Internet werden nicht angezeigt.** Es werden nur Bilder angezeigt, die Teil der E-Mail selbst sind.\n- **Interaktive Inhalte werden entfernt.** Formulare und ähnliche Inhalte werden nicht angezeigt.\n- **Einige „.msg“-Dateien zeigen keinen Text.** Outlook kann den Text einer E-Mail im „Rich Text“-Format speichern. Dieses Format wird nicht unterstützt, daher wird anstelle des Textes eine Notiz angezeigt. Andere `.msg`-Dateien werden wie gewohnt angezeigt.\n- **Anhänge werden nur aufgelistet.** Das PDF benennt die Anhänge, sie können jedoch nicht daraus geöffnet werden.",
+    "The email cannot be shown" : "Die E-Mail kann nicht angezeigt werden",
+    "The file might be damaged or in a format that is not supported." : "Die Datei kann beschädigt sein oder in einem Format vorliegen, das nicht unterstützt wird.",
+    "The body of this email is only stored as compressed RTF, which is not supported. The email has no HTML or plain text version of the body to show instead." : "Der Text dieser E-Mail wird nur als komprimiertes RTF gespeichert, was nicht unterstützt wird. Die E-Mail verfügt über keine HTML- oder Klartextversion des Textkörpers, die stattdessen angezeigt werden könnte.",
+    "Attachments" : "Anhänge",
+    "unnamed" : "Unbenannt",
+    "From" : "Von",
+    "Subject" : "Betreff",
+    "(no subject)" : "(Kein Betreff)",
+    "To" : "Bis",
+    "Cc" : "Cc",
+    "Date" : "Datum"
 },
 "nplurals=2; plural=(n != 1);");

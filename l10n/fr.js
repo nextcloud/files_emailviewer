@@ -3,8 +3,10 @@ OC.L10N.register(
     {
     "Email Viewer" : "Visionneuse d'e-mail",
     "View .msg and .eml files" : "Visualiser les fichiers .msg et .eml",
+    "Attachments" : "Pièces jointes",
     "From" : "Du",
     "Subject" : "Objet",
+    "To" : "À",
     "Cc" : "Cc",
     "Date" : "Date"
 },
