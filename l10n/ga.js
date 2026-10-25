@@ -3,8 +3,16 @@ OC.L10N.register(
     {
     "Email Viewer" : "Amharcóir Ríomhphoist",
     "View .msg and .eml files" : "Féach ar chomhaid .msg agus .eml",
+    "### Email Viewer lets you view `.eml` and `.msg` files in Nextcloud.\n\nIt renders the email as a PDF in your browser and opens it in the PDF Viewer.\n\n#### Requirements\n\n- Nextcloud 28 or newer\n- Viewer and PDF Viewer for Nextcloud\n\n#### Installation\n\n- Download and enable files_emailviewer\n- Upload a `.eml` or `.msg` file and view it directly in Nextcloud 🙌\n\n#### Limitations\n\n- **Images from the internet are not shown.** Only images that are part of the email itself are shown.\n- **Interactive content is removed.** Forms and similar content do not appear.\n- **Some `.msg` files show no text.** Outlook can save the text of an email in its \"Rich Text\" format. This format is not supported, so a note is shown instead of the text. Other `.msg` files are shown as usual.\n- **Attachments are only listed.** The PDF names the attachments, but they cannot be opened from it." : "### Ligeann Email Viewer duit comhaid `.eml` agus `.msg` a fheiceáil i Nextcloud.\n\nTiontaíonn sé an ríomhphost ina chomhad PDF i do bhrabhsálaí agus osclaíonn sé é sa PDF Viewer.\n\n#### Riachtanais\n\n- Nextcloud 28 nó níos nuaí\n- Viewer agus PDF Viewer do Nextcloud\n\n#### Suiteáil\n\n- Íoslódáil agus cumasaigh `files_emailviewer`\n- Uaslódáil comhad `.eml` nó `.msg` agus féach air go díreach i Nextcloud 🙌\n\n#### Teorainneacha\n\n- **Ní thaispeántar íomhánna ón idirlíon.** Ní thaispeántar ach íomhánna atá mar chuid den ríomhphost féin.\n- **Baintear ábhar idirghníomhach amach.** Ní thaispeántar foirmeacha ná ábhar den chineál céanna.\n- **Ní thaispeántar téacs i roinnt comhad `.msg`.** Is féidir le Outlook téacs ríomhphoist a shábháil i bhformáid \"Rich Text\". Ní thacaítear leis an bhformáid seo, mar sin taispeántar nóta in áit an téacais. Taispeántar comhaid `.msg` eile mar is gnách.\n- **Ní dhéantar ach na ceangaltáin a liostú.** Luaitear ainmneacha na gceangaltán sa PDF, ach ní féidir iad a oscailt ón gcomhad sin.",
+    "The email cannot be shown" : "Ní féidir an ríomhphost a thaispeáint",
+    "The file might be damaged or in a format that is not supported." : "D’fhéadfadh an comhad a bheith damáistithe, nó i bhformáid nach dtacaítear léi.",
+    "The body of this email is only stored as compressed RTF, which is not supported. The email has no HTML or plain text version of the body to show instead." : "Ní stóráiltear corp an ríomhphoist seo ach mar RTF comhbhrúite, formáid nach dtacaítear léi. Níl leagan HTML ná leagan gnáth-théacs de chorp an ríomhphoist ar fáil le taispeáint ina áit.",
+    "Attachments" : "Ceangaltáin",
+    "unnamed" : "gan ainm",
     "From" : "Ó",
     "Subject" : "Ábhar",
+    "(no subject)" : "(gan ábhar)",
+    "To" : "Chun",
     "Cc" : "Cc",
     "Date" : "Dáta"
 },
