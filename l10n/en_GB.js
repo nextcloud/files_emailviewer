@@ -3,9 +3,15 @@ OC.L10N.register(
     {
     "Email Viewer" : "Email Viewer",
     "View .msg and .eml files" : "View .msg and .eml files",
+    "### Email Viewer lets you view `.eml` and `.msg` files in Nextcloud.\n\nIt renders the email as a PDF in your browser and opens it in the PDF Viewer.\n\n#### Requirements\n\n- Nextcloud 28 or newer\n- Viewer and PDF Viewer for Nextcloud\n\n#### Installation\n\n- Download and enable files_emailviewer\n- Upload a `.eml` or `.msg` file and view it directly in Nextcloud 🙌\n\n#### Limitations\n\n- **Images from the internet are not shown.** Only images that are part of the email itself are shown.\n- **Interactive content is removed.** Forms and similar content do not appear.\n- **Some `.msg` files show no text.** Outlook can save the text of an email in its \"Rich Text\" format. This format is not supported, so a note is shown instead of the text. Other `.msg` files are shown as usual.\n- **Attachments are only listed.** The PDF names the attachments, but they cannot be opened from it." : "### Email Viewer lets you view `.eml` and `.msg` files in Nextcloud.\n\nIt renders the email as a PDF in your browser and opens it in the PDF Viewer.\n\n#### Requirements\n\n- Nextcloud 28 or newer\n- Viewer and PDF Viewer for Nextcloud\n\n#### Installation\n\n- Download and enable files_emailviewer\n- Upload a `.eml` or `.msg` file and view it directly in Nextcloud 🙌\n\n#### Limitations\n\n- **Images from the internet are not shown.** Only images that are part of the email itself are shown.\n- **Interactive content is removed.** Forms and similar content do not appear.\n- **Some `.msg` files show no text.** Outlook can save the text of an email in its \"Rich Text\" format. This format is not supported, so a note is shown instead of the text. Other `.msg` files are shown as usual.\n- **Attachments are only listed.** The PDF names the attachments, but they cannot be opened from it.",
+    "The email cannot be shown" : "The email cannot be shown",
+    "The file might be damaged or in a format that is not supported." : "The file might be damaged or in a format that is not supported.",
+    "The body of this email is only stored as compressed RTF, which is not supported. The email has no HTML or plain text version of the body to show instead." : "The body of this email is only stored as compressed RTF, which is not supported. The email has no HTML or plain text version of the body to show instead.",
     "Attachments" : "Attachments",
+    "unnamed" : "unnamed",
     "From" : "From",
     "Subject" : "Subject",
+    "(no subject)" : "(no subject)",
     "To" : "To",
     "Cc" : "Cc",
     "Date" : "Date"
