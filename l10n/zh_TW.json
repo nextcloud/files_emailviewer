@@ -1,9 +1,15 @@
 { "translations": {
     "Email Viewer" : "電子郵件檢視程式",
     "View .msg and .eml files" : "檢視 .msg 與 .eml 檔案",
+    "### Email Viewer lets you view `.eml` and `.msg` files in Nextcloud.\n\nIt renders the email as a PDF in your browser and opens it in the PDF Viewer.\n\n#### Requirements\n\n- Nextcloud 28 or newer\n- Viewer and PDF Viewer for Nextcloud\n\n#### Installation\n\n- Download and enable files_emailviewer\n- Upload a `.eml` or `.msg` file and view it directly in Nextcloud 🙌\n\n#### Limitations\n\n- **Images from the internet are not shown.** Only images that are part of the email itself are shown.\n- **Interactive content is removed.** Forms and similar content do not appear.\n- **Some `.msg` files show no text.** Outlook can save the text of an email in its \"Rich Text\" format. This format is not supported, so a note is shown instead of the text. Other `.msg` files are shown as usual.\n- **Attachments are only listed.** The PDF names the attachments, but they cannot be opened from it." : "### 電子郵件檢視程式讓您可以在 Nextcloud 中檢視 `.eml` 與 `.msg` 檔案。\n\n其將電子郵件在您的瀏覽器中顯示為 PDF 並以 PDF 的形式開啟。\n\n#### 系統需求\n\n- Nextcloud 28 或更新版本\n- Nextcloud 的檢視程式與 PDF 檢視程式\n\n#### 安裝\n\n- 下載並啟用 files_emailviewer\n- 上傳 `.eml` 或 `.msg` 檔案，並在 Nextcloud 中直接檢視 🙌\n\n#### 限制\n\n- **無法顯示來自網際網路的影像。**僅能顯示電子郵件一部分的影像。\n- **會移除互動內容。**表單與類似的內容不會顯示。\n- **部份 `.msg` 檔案不會顯示文字。**Outlook 可將電子郵件的文字儲存為其 Rich Text 格式。我們並不支援此格式，系統會顯示提示而非內文。其他 `.msg` 檔案則可正常顯示。\n- **附件僅會列出名稱。**PDF 會列出附件名稱，但無法開啟。",
+    "The email cannot be shown" : "無法顯示電子郵件",
+    "The file might be damaged or in a format that is not supported." : "檔案可能已損毀，或使用了不支援的格式。",
+    "The body of this email is only stored as compressed RTF, which is not supported. The email has no HTML or plain text version of the body to show instead." : "此電子郵件的內文以壓縮的 RTF 格式儲存，而系統不支援此格式。電子郵件亦無 HTML 或純文字版本的內文可供顯示。",
     "Attachments" : "附件",
+    "unnamed" : "未命名",
     "From" : "從",
     "Subject" : "主旨",
+    "(no subject)" : "（無主旨）",
     "To" : "至",
     "Cc" : "副本",
     "Date" : "日期"
