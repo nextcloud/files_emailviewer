@@ -13,6 +13,7 @@
 
 <script>
 import { translate as t } from '@nextcloud/l10n'
+import { generateUrl } from '@nextcloud/router'
 import NcNoteCard from '@nextcloud/vue/components/NcNoteCard'
 import { PDF_MIME_TYPE } from '../model/MimeType.ts'
 import { convertMailToPdf } from '../util/convert.ts'
@@ -46,10 +47,11 @@ export default {
 				return
 			}
 			const pdf = await convertMailToPdf(mail, this.file.mime)
+			const pdfData = new Uint8Array(await pdf.arrayBuffer())
 			if (this.isDestroyed) {
 				return
 			}
-			this.showPdf(this.file, pdf)
+			this.showPdf(this.file, pdfData)
 		} catch (error) {
 			logger.error('Converting the email failed', { error })
 			this.error = error
@@ -74,11 +76,11 @@ export default {
 			return response.arrayBuffer()
 		},
 
-		showPdf(fileInfo, pdf) {
-			const pdfBlobUrl = URL.createObjectURL(pdf)
+		showPdf(fileInfo, pdfData) {
 			const fileInfoPDF = {
 				filename: fileInfo.filename,
-				source: pdfBlobUrl,
+				// An empty URL prevents PDF.js from fetching a document itself.
+				source: '',
 				basename: fileInfo.basename,
 				mime: PDF_MIME_TYPE,
 				etag: 'fixme',
@@ -86,13 +88,34 @@ export default {
 				fileid: fileInfo.fileid,
 			}
 
+			// files_pdfviewer only accepts URLs as source. Pass the bytes directly
+			// to its PDF.js application once it has initialized instead.
+			let isClosed = false
+			const onWebviewerloaded = (event) => {
+				const viewerWindow = event.detail?.source
+				if (viewerWindow?.location.pathname !== generateUrl('/apps/files_pdfviewer/')) {
+					return
+				}
+				document.removeEventListener('webviewerloaded', onWebviewerloaded)
+				const application = viewerWindow.PDFViewerApplication
+				application.initializedPromise
+					.then(() => {
+						if (!isClosed) {
+							return application.open({ data: pdfData })
+						}
+					})
+					.catch((error) => logger.error('Opening the email PDF failed', { error }))
+			}
+			document.addEventListener('webviewerloaded', onWebviewerloaded)
+
 			// openWith replaces the callbacks of whoever opened the viewer, like the Files app
 			const previousOnClose = OCA.Viewer.onClose
 			OCA.Viewer.openWith('pdf', {
 				fileInfo: fileInfoPDF,
 				list: [fileInfoPDF],
 				onClose() {
-					URL.revokeObjectURL(pdfBlobUrl)
+					isClosed = true
+					document.removeEventListener('webviewerloaded', onWebviewerloaded)
 					previousOnClose()
 				},
 			})
