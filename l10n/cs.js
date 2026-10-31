@@ -4,6 +4,7 @@ OC.L10N.register(
     "Email Viewer" : "Prohlížeč e-mailů",
     "View .msg and .eml files" : "Zobrazit .msg a .eml soubory",
     "Attachments" : "Přílohy",
+    "unnamed" : "bez názvu",
     "From" : "Od",
     "Subject" : "Předmět",
     "To" : "Do",
