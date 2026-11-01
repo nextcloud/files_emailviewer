@@ -50,7 +50,7 @@
     "@playwright/test": "^1.64.1",
     "@tutao/oxmsg": "^0.2.3",
     "@types/node": "^26.6.5",
-    "typescript": "^6.0.3",
+    "typescript": "^7.0.2",
     "vitest": "^5.0.5",
     "vue-loader": "^15.11.1",
     "yaml": "^2.9.1",
