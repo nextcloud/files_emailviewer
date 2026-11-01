@@ -12,7 +12,7 @@ OC.L10N.register(
     "From" : "Od",
     "Subject" : "Predmet",
     "(no subject)" : "(bez predmetu)",
-    "To" : "Do",
+    "To" : "Komu",
     "Cc" : "Kópia",
     "Date" : "Dátum"
 },
