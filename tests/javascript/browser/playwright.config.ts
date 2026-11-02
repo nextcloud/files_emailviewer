@@ -10,7 +10,8 @@ const URL = `http://127.0.0.1:${PORT}`
 export default defineConfig({
 	testDir: '../../../src',
 	testMatch: '**/*.browser.test.ts',
-	outputDir: '../../output/playwright',
+	outputDir: '../../output/browser/test-results',
+	reporter: process.env.CI ? 'github' : [['html', { outputFolder: '../../output/browser/report' }]],
 	snapshotPathTemplate: '{testDir}/../tests/fixtures/rendering-snapshots/{arg}{ext}',
 	timeout: 30_000,
 	fullyParallel: true,
