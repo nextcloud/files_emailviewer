@@ -6,7 +6,7 @@
 /**
  * Run the Playwright tests (`npm run test:e2e`) once per selected Nextcloud version.
  *
- * Usage: node tests/javascript/e2e/run-tests-for-versions.mts <min|max|min-max|all> [playwright args…]
+ * Usage: node tests/javascript/e2e/scripts/run-tests-for-versions.mts <min|max|min-max|all> [playwright args…]
  */
 
 import { spawnSync } from 'child_process'

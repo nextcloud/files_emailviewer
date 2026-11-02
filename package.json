@@ -1,7 +1,7 @@
 {
   "name": "files_emailviewer",
   "description": "Email viewer plugin for Nextcloud",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "bugs": {
     "url": "https://github.com/nextcloud/files_emailviewer/issues"
   },
@@ -22,12 +22,12 @@
     "typecheck": "tsc",
     "test": "vitest run",
     "test:browser": "playwright test -c tests/javascript/browser/playwright.config.ts",
-    "start:nextcloud": "node tests/javascript/e2e/run-nextcloud-server.mts",
+    "start:nextcloud": "node tests/javascript/e2e/scripts/run-nextcloud-server.mts",
     "test:e2e": "playwright test -c tests/javascript/e2e/playwright.config.ts",
-    "test:e2e:min": "node tests/javascript/e2e/run-tests-for-versions.mts min",
-    "test:e2e:max": "node tests/javascript/e2e/run-tests-for-versions.mts max",
-    "test:e2e:min-max": "node tests/javascript/e2e/run-tests-for-versions.mts min-max",
-    "test:e2e:all": "node tests/javascript/e2e/run-tests-for-versions.mts all"
+    "test:e2e:min": "node tests/javascript/e2e/scripts/run-tests-for-versions.mts min",
+    "test:e2e:max": "node tests/javascript/e2e/scripts/run-tests-for-versions.mts max",
+    "test:e2e:min-max": "node tests/javascript/e2e/scripts/run-tests-for-versions.mts min-max",
+    "test:e2e:all": "node tests/javascript/e2e/scripts/run-tests-for-versions.mts all"
   },
   "dependencies": {
     "@kenjiuno/msgreader": "^1.29.0",
