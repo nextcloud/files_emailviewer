@@ -10,11 +10,14 @@ declare(strict_types=1);
 namespace OCA\Files_EmailViewer\AppInfo;
 
 use OCA\Files_EmailViewer\Listeners\LoadViewerListener;
+use OCA\Files_EmailViewer\Listeners\PdfViewerCspListener;
 use OCA\Viewer\Event\LoadViewer;
 use OCP\AppFramework\App;
 use OCP\AppFramework\Bootstrap\IBootContext;
 use OCP\AppFramework\Bootstrap\IBootstrap;
 use OCP\AppFramework\Bootstrap\IRegistrationContext;
+use OCP\AppFramework\Http\Events\BeforeTemplateRenderedEvent;
+use OCP\Security\CSP\AddContentSecurityPolicyEvent;
 
 class Application extends App implements IBootstrap {
 	public const APP_ID = 'files_emailviewer';
@@ -25,6 +28,8 @@ class Application extends App implements IBootstrap {
 
 	public function register(IRegistrationContext $context): void {
 		$context->registerEventListener(LoadViewer::class, LoadViewerListener::class);
+		$context->registerEventListener(BeforeTemplateRenderedEvent::class, PdfViewerCspListener::class);
+		$context->registerEventListener(AddContentSecurityPolicyEvent::class, PdfViewerCspListener::class);
 	}
 
 	public function boot(IBootContext $context): void {
