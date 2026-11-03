@@ -81,6 +81,31 @@ npx playwright install chromium
 npm run test:browser
 # after an intended change of the rendering, to update the PDFs in tests/fixtures/rendering-snapshots
 npm run test:browser -- --update-snapshots
+# end-to-end tests with Playwright against Nextcloud in Docker, `tests/javascript/e2e/*.spec.ts`
+npx playwright install chromium firefox webkit
+npm run test:e2e
+```
+
+### End-to-end tests
+
+`npm run test:e2e` starts Nextcloud in a Docker container.
+
+By default, the tests run against the highest Nextcloud version in `appinfo/info.xml`.
+To choose a server branch, or to run the tests against several versions one after the other:
+
+```sh
+NEXTCLOUD_BRANCH=stable28 npm run test:e2e
+# the lowest, the highest, both, or all versions in appinfo/info.xml
+npm run test:e2e:min
+npm run test:e2e:max
+npm run test:e2e:min-max
+npm run test:e2e:all
+```
+
+Arguments after `--` go to Playwright, for example to debug in the UI mode on a remote machine:
+
+```sh
+NEXTCLOUD_BRANCH=stable28 npm run test:e2e -- --ui-host=0.0.0.0 --ui-port=8080
 ```
 
 Most test cases are written declaratively in YAML files, without code:

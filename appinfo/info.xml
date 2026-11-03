@@ -29,7 +29,7 @@ It renders the email as a PDF in your browser and opens it in the PDF Viewer.
 - **Some `.msg` files show no text.** Outlook can save the text of an email in its "Rich Text" format. This format is not supported, so a note is shown instead of the text. Other `.msg` files are shown as usual.
 - **Attachments are only listed.** The PDF names the attachments, but they cannot be opened from it.
 ]]></description>
-    <version>0.3.0</version>
+    <version>0.3.1</version>
     <licence>agpl</licence>
     <author mail="hamza.mahjoubi221@proton.me">Hamza Mahjoubi</author>
     <author mail="mail@danielkesselberg.de">Daniel Kesselberg</author>
@@ -38,6 +38,6 @@ It renders the email as a PDF in your browser and opens it in the PDF Viewer.
     <bugs>https://github.com/nextcloud/files_emailviewer/issues</bugs>
     <dependencies>
 	<php min-version="8.2" max-version="8.5" />
-    <nextcloud min-version="28" max-version="35"/>
+    <nextcloud min-version="28" max-version="35" />
     </dependencies>
 </info>
