@@ -3,9 +3,15 @@ OC.L10N.register(
     {
     "Email Viewer" : "E-postvisare",
     "View .msg and .eml files" : "Visa .msg- och .eml-filer",
+    "### Email Viewer lets you view `.eml` and `.msg` files in Nextcloud.\n\nIt renders the email as a PDF in your browser and opens it in the PDF Viewer.\n\n#### Requirements\n\n- Nextcloud 28 or newer\n- Viewer and PDF Viewer for Nextcloud\n\n#### Installation\n\n- Download and enable files_emailviewer\n- Upload a `.eml` or `.msg` file and view it directly in Nextcloud 🙌\n\n#### Limitations\n\n- **Images from the internet are not shown.** Only images that are part of the email itself are shown.\n- **Interactive content is removed.** Forms and similar content do not appear.\n- **Some `.msg` files show no text.** Outlook can save the text of an email in its \"Rich Text\" format. This format is not supported, so a note is shown instead of the text. Other `.msg` files are shown as usual.\n- **Attachments are only listed.** The PDF names the attachments, but they cannot be opened from it." : "### E-postvisaren låter dig visa `.eml`- och `.msg`-filer i Nextcloud.\n\nDen återger e-postmeddelandet som en PDF i webbläsaren och öppnar det i PDF Viewer.\n\n#### Krav\n\n- Nextcloud 28 eller senare\n- Viewer och PDF Viewer för Nextcloud\n\n#### Installation\n\n- Hämta och aktivera files_emailviewer\n- Ladda upp en `.eml`- eller `.msg`-fil och visa den direkt i Nextcloud 🙌\n\n#### Begränsningar\n\n- **Bilder från internet visas inte.** Bara bilder som ingår i själva e-postmeddelandet visas.\n- **Interaktivt innehåll tas bort.** Formulär och liknande innehåll visas inte.\n- **Vissa `.msg`-filer visar ingen text.** Outlook kan spara ett e-postmeddelandes text i sitt format \"Rich Text\". Det formatet stöds inte, så en anteckning visas i stället för texten. Andra `.msg`-filer visas som vanligt.\n- **Bilagor listas bara.** PDF:en namnger bilagorna, men de kan inte öppnas därifrån.",
+    "The email cannot be shown" : "E-postmeddelandet kan inte visas",
+    "The file might be damaged or in a format that is not supported." : "Filen kan vara skadad eller ha ett format som inte stöds.",
+    "The body of this email is only stored as compressed RTF, which is not supported. The email has no HTML or plain text version of the body to show instead." : "Brödtexten i det här e-postmeddelandet är bara lagrad som komprimerad RTF, vilket inte stöds. E-postmeddelandet saknar en HTML- eller klartextversion av brödtexten som kan visas i stället.",
     "Attachments" : "Bilagor",
+    "unnamed" : "namnlös",
     "From" : "Från",
     "Subject" : "Ämne",
+    "(no subject)" : "(inget ämne)",
     "To" : "Till",
     "Cc" : "Cc",
     "Date" : "Datum"
