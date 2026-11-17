@@ -10,11 +10,12 @@ for (const renderingCase of listRenderingCases()) {
 	test(renderingCase.file, async ({ page }) => {
 		const { mail, mime } = await loadMail(renderingCase)
 		await page.goto('/')
-		const { pdf, error } = await page.evaluate(function renderInPage({ mail, mime }) {
+		const { image, text, error } = await page.evaluate(function renderInPage({ mail, mime }) {
 			return window.renderEmail(mail, mime)
 		}, { mail: mail.toString('base64'), mime })
 
 		expect(error).toBeNull()
-		expect(Buffer.from(pdf!, 'base64')).toMatchSnapshot([`${renderingCase.file}.pdf`])
+		expect.soft(text).toMatchSnapshot([`${renderingCase.file}.txt`])
+		expect.soft(Buffer.from(image!, 'base64')).toMatchSnapshot([`${renderingCase.file}.png`])
 	})
 }

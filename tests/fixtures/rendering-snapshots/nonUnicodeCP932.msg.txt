@@ -1,0 +1,4 @@
+--- page 1 ---
+Subject 日本語 Non Unicode タイトル
+To xmailuser2@xmailserver.test
+日本語 Non Unicode 本文

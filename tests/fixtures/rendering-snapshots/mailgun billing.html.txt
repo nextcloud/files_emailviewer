@@ -1,0 +1,17 @@
+--- page 1 ---
+From Sender <sender@example.com>
+Subject mailgun billing.html
+To Bob <bob@example.com>
+Date October 1, 2026 at 8:00:00 AM UTC
+$33.98 Paid
+Thanks for using Acme Inc.
+Lee Munroe
+Invoice #12345
+June 01 2014
+Service 1 $ 19.99
+Service 2 $ 9.99
+Service 3 $ 4.00
+Total $ 33.98
+View in browser
+Acme Inc. 123 Van Ness, San Francisco 94102
+Questions? Email support@acme.inc

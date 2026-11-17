@@ -1,0 +1,11 @@
+--- page 1 ---
+From Sender <sender@example.com>
+Subject mailgun action.html
+To Bob <bob@example.com>
+Date October 1, 2026 at 8:00:00 AM UTC
+Please confirm your email address by clicking the link below.
+We may need to send you critical information about our service and it is important
+that we have an accurate email address.
+Confirm Email Address
+— The Mailgunners
+Follow @Mail_Gun on Twitter.

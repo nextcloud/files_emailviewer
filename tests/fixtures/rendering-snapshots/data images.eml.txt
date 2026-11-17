@@ -1,0 +1,11 @@
+--- page 1 ---
+From Alice <alice@example.com>
+Subject Images as data URLs
+To Bob <bob@example.com>
+Date October 1, 2026 at 8:00:00 AM UTC
+Images as data URLs
+PNG with width and height:
+JPEG scaled to 160 pixels:
+WebP:
+Icon inside of the text.
+Text on a CSS background image

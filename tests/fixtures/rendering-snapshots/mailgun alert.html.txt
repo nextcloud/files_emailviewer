@@ -1,0 +1,12 @@
+--- page 1 ---
+From Sender <sender@example.com>
+Subject mailgun alert.html
+To Bob <bob@example.com>
+Date October 1, 2026 at 8:00:00 AM UTC
+Warning: You're approaching your limit. Please upgrade.
+You have 1 free report remaining.
+Add your credit card now to upgrade your account to a premium plan to ensure you
+don't miss out on any reports.
+Upgrade My Account
+Thanks for choosing Acme Inc.
+Unsubscribe from these alerts.
