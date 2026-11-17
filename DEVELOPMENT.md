@@ -76,11 +76,18 @@ sequenceDiagram
 ```sh
 # unit tests with Vitest, `*.test.ts`
 npm test
-# browser tests with Playwright in Chromium, `*.browser.test.ts`
+# browser tests with Playwright in Chromium, `*.browser.test.ts`,
+# recommended in the official Playwright Docker image like in the CI, as the rendered PDFs depend on the browser and the fonts
+docker run -it --rm --ipc=host -v "$PWD:/work" -w /work \
+	"mcr.microsoft.com/playwright:v$(node -p "require('@playwright/test/package.json').version")-resolute" \
+	npm run test:browser
+# after an intended change of the rendering, to update the PDFs in tests/fixtures/rendering-snapshots, in the same way
+docker run -it --rm --ipc=host -v "$PWD:/work" -w /work \
+	"mcr.microsoft.com/playwright:v$(node -p "require('@playwright/test/package.json').version")-resolute" \
+	npm run test:browser -- --update-snapshots
+# or without Docker, where PDFs with images might differ from the snapshots
 npx playwright install chromium
 npm run test:browser
-# after an intended change of the rendering, to update the PDFs in tests/fixtures/rendering-snapshots
-npm run test:browser -- --update-snapshots
 # end-to-end tests with Playwright against Nextcloud in Docker, `tests/javascript/e2e/*.spec.ts`
 npx playwright install chromium firefox webkit
 npm run test:e2e
