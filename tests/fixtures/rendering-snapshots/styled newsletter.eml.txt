@@ -1,0 +1,13 @@
+--- page 1 ---
+From Newsletter <news@example.com>
+Subject Monthly newsletter
+To Bob <bob@example.com>
+Date October 1, 2026 at 8:00:00 AM UTC
+Monthly newsletter
+Styled box with a background
+Normal bold italic link code
+Cell 1 Cell 2
+Cell 3 Cell 4
+First item
+Second item
+Grüße äöü

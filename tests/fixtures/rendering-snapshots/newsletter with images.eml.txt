@@ -1,0 +1,8 @@
+--- page 1 ---
+From Newsletter <news@example.com>
+Subject Newsletter with images
+To Bob <bob@example.com>
+Date October 1, 2026 at 8:00:00 AM UTC
+Newsletter with images
+News with an icon from a data URL.
+Read more

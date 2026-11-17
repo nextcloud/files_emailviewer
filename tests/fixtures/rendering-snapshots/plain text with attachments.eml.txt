@@ -1,0 +1,13 @@
+--- page 1 ---
+From Alice <alice@example.com>
+Subject Report
+To Bob <bob@example.com>, dave@example.com
+Cc Carol <carol@example.com>
+Date October 1, 2026 at 8:00:00 AM UTC
+Hello Bob,
+see the attached report.
+Indented line
+Alice
+Attachments
+report.pdf
+unnamed

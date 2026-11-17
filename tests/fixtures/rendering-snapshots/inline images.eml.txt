@@ -1,0 +1,9 @@
+--- page 1 ---
+From Alice <alice@example.com>
+Subject Logo
+To Bob <bob@example.com>
+Date October 1, 2026 at 8:00:00 AM UTC
+Logo:
+External image:
+Attachments
+unused@example.com

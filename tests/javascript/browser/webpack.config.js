@@ -26,7 +26,11 @@ module.exports = {
 		...webpackConfig.devServer,
 		hot: false,
 		client: false,
-		static: path.resolve(__dirname, 'page'),
+		static: [
+			path.resolve(__dirname, 'page'),
+			// worker and fonts of pdf.js, for inspecting the rendered PDFs
+			{ directory: path.dirname(require.resolve('pdfjs-dist/package.json')), publicPath: '/pdfjs-dist' },
+		],
 		devMiddleware: { writeToDisk: false },
 		setupMiddlewares: function serveRenderFramePage(middlewares, devServer) {
 			devServer.app.get(RENDER_FRAME_PAGE_URL, function sendRenderFramePage(_request, response) {

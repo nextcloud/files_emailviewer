@@ -1,0 +1,14 @@
+--- page 1 ---
+From Sender <sender@example.com>
+Subject leemunroe responsive.html
+To Bob <bob@example.com>
+Date October 1, 2026 at 8:00:00 AM UTC
+This is preheader text. Some clients will show this text as a preview.
+Hi there
+Sometimes you just want to send a simple HTML email with a simple design and clear call to action. This is it.
+Call To Action
+This is a really simple email template. It's sole purpose is to get the recipient to click the button with no distractions.
+Good luck! Hope it works.
+Company Inc, 7-11 Commercial Ct, Belfast BT1 2NB
+Don't like these emails? Unsubscribe.
+Powered by HTMLemail.io

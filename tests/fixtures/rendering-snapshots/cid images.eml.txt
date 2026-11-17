@@ -1,0 +1,13 @@
+--- page 1 ---
+From Alice <alice@example.com>
+Subject Images as attachments
+To Bob <bob@example.com>
+Date October 1, 2026 at 8:00:00 AM UTC
+Images as attachments
+The logo on the left is a PNG attachment.
+JPEG photo:
+WebP:
+Missing attachment:
+Attachments
+report.pdf
+unused@example.com

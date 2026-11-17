@@ -1,0 +1,6 @@
+--- page 1 ---
+Subject Attachment with the name "Attachment[1.pdf"
+To a@b.c
+Dummy text. Btw, the pdf is actually a .txt
+Attachments
+Attachment[1.pdf
