@@ -9,7 +9,7 @@
                - 'appinfo/info.xml'
                - 'package.json'
                - 'package-lock.json'
-@@ -77,14 +79,26 @@
+@@ -77,14 +79,28 @@
          run: npm i -g 'npm@${{ steps.versions.outputs.package-manager-version }}'
  
        - name: Install dependencies & build
@@ -24,11 +24,13 @@
 -        run: npm run test --if-present
 +        run: npm run test
 +
-+      - name: Install Playwright browser
-+        run: npx playwright install --with-deps chromium
-+
++      # Use the Playwright container for stable rendering
 +      - name: Test in browser
-+        run: npm run test:browser
++        run: |
++          PLAYWRIGHT_VERSION=$(node -p "require('@playwright/test/package.json').version")
++          docker run --rm --ipc=host -e CI -v "$PWD:/work" -w /work \
++            "mcr.microsoft.com/playwright:v${PLAYWRIGHT_VERSION}-resolute" \
++            npm run test:browser
 +
 +      - name: Upload browser test results
 +        if: failure()

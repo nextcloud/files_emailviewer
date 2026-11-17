@@ -86,11 +86,13 @@ jobs:
       - name: Test
         run: npm run test
 
-      - name: Install Playwright browser
-        run: npx playwright install --with-deps chromium
-
+      # Use the Playwright container for stable rendering
       - name: Test in browser
-        run: npm run test:browser
+        run: |
+          PLAYWRIGHT_VERSION=$(node -p "require('@playwright/test/package.json').version")
+          docker run --rm --ipc=host -e CI -v "$PWD:/work" -w /work \
+            "mcr.microsoft.com/playwright:v${PLAYWRIGHT_VERSION}-resolute" \
+            npm run test:browser
 
       - name: Upload browser test results
         if: failure()
