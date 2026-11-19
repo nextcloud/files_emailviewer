@@ -2,7 +2,7 @@
  * SPDX-FileCopyrightText: 2024 Nextcloud GmbH and Nextcloud contributors
  * SPDX-License-Identifier: AGPL-3.0-or-later
  */
-import EmailView from './views/EmailView.vue'
+import EmailViewVue2Adapter from './EmailViewVue2Adapter.ts'
 
 /**
  * Initialize files_emailviewer
@@ -29,7 +29,7 @@ function initEmailViewer() {
 			'message/rfc822',
 		],
 
-		component: EmailView,
+		component: EmailViewVue2Adapter,
 
 		canCompare: false,
 	})

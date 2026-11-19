@@ -17,9 +17,9 @@ export default defineConfig({
 	fullyParallel: true,
 	use: { baseURL: URL },
 	webServer: {
-		command: `npx webpack serve --config tests/javascript/browser/webpack.config.js --node-env development --port ${PORT}`,
+		command: `npx vite build --config tests/javascript/browser/vite.config.mts --mode development && npx vite preview --config tests/javascript/browser/vite.config.mts --host 127.0.0.1 --port ${PORT} --strictPort`,
 		url: URL,
-		// the repository, for the configurations of Babel and TypeScript
+		// the repository, for the configurations of Vite and TypeScript
 		cwd: '../../..',
 		reuseExistingServer: !process.env.CI,
 	},
