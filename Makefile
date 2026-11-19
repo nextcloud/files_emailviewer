@@ -27,7 +27,6 @@ appstore: clean-build
 	--exclude=.tx \
 	--exclude=Makefile \
 	--exclude=README.md \
-	--exclude=babel.config.js \
 	--exclude=build \
 	--exclude=node_modules \
 	--exclude=psalm.xml \
@@ -36,6 +35,6 @@ appstore: clean-build
 	--exclude=tests \
 	--exclude=vendor-bin \
 	--exclude=vendor/bin \
-	--exclude=webpack.config.js \
+	--exclude=vite.config.mts \
 	$(project_dir)/ $(source_dir)
 	tar -czf $(build_dir)/$(app_name).tar.gz -C $(build_dir) $(app_name)

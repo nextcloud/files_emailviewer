@@ -11,92 +11,102 @@
 	</div>
 </template>
 
-<script>
-import { translate as t } from '@nextcloud/l10n'
+<script setup lang="ts">
+import type { ViewerFileInfo, ViewerService } from '../types/Viewer.ts'
+
+import { t } from '@nextcloud/l10n'
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import NcNoteCard from '@nextcloud/vue/components/NcNoteCard'
 import { PDF_MIME_TYPE } from '../model/MimeType.ts'
 import { convertMailToPdf } from '../util/convert.ts'
 import { logger } from '../util/logger.ts'
 
-export default {
-	name: 'EmailView',
+const props = defineProps<{
+	/** files of the Viewer, see the Mime mixin of the Viewer app */
+	fileList: ViewerFileInfo[]
+	/** id of the file in `fileList` to show */
+	fileid: number
+	/** URL of the file */
+	src: string
+}>()
 
-	components: {
-		NcNoteCard,
-	},
+const emit = defineEmits<{
+	/** the PDF is opened, or the error is shown */
+	loaded: []
+}>()
 
-	data() {
-		return {
-			error: null,
-			isDestroyed: false,
+const error = ref<unknown>(null)
+let isUnmounted = false
+
+const file = computed(() => props.fileList.find((fileInfo) => fileInfo.fileid === props.fileid)!)
+
+onMounted(async () => {
+	try {
+		const mail = await loadEmail()
+		if (isUnmounted) {
+			return
 		}
-	},
-
-	computed: {
-		file() {
-			// fileList and fileid are provided by the Mime mixin of the Viewer.
-			return this.fileList.find((file) => file.fileid === this.fileid)
-		},
-	},
-
-	async mounted() {
-		try {
-			const mail = await this.loadEmail()
-			if (this.isDestroyed) {
-				return
-			}
-			const pdf = await convertMailToPdf(mail, this.file.mime)
-			if (this.isDestroyed) {
-				return
-			}
-			this.showPdf(this.file, pdf)
-		} catch (error) {
-			logger.error('Converting the email failed', { error })
-			this.error = error
-		} finally {
-			this.doneLoading()
+		const pdf = await convertMailToPdf(mail, file.value.mime)
+		if (isUnmounted) {
+			return
 		}
-	},
+		showPdf(file.value, pdf)
+	} catch (caught) {
+		logger.error('Converting the email failed', { error: caught })
+		error.value = caught
+	} finally {
+		emit('loaded')
+	}
+})
 
-	// eslint-disable-next-line vue/no-deprecated-destroyed-lifecycle -- Vue 2 has no beforeUnmount
-	beforeDestroy() {
-		this.isDestroyed = true
-	},
+onBeforeUnmount(() => {
+	isUnmounted = true
+})
 
-	methods: {
-		t,
+/**
+ * @return the email file
+ */
+async function loadEmail(): Promise<ArrayBuffer> {
+	const response = await fetch(props.src)
+	if (!response.ok) {
+		throw new Error(`Loading the email failed with status ${response.status}`)
+	}
+	return response.arrayBuffer()
+}
 
-		async loadEmail() {
-			const response = await fetch(this.src)
-			if (!response.ok) {
-				throw new Error(`Loading the email failed with status ${response.status}`)
-			}
-			return response.arrayBuffer()
+/**
+ * @return the service of the Viewer app
+ */
+function getViewer(): ViewerService {
+	return (window as unknown as { OCA: { Viewer: ViewerService } }).OCA.Viewer
+}
+
+/**
+ * @param fileInfo the email file
+ * @param pdf the email as PDF
+ */
+function showPdf(fileInfo: ViewerFileInfo, pdf: Blob): void {
+	const pdfBlobUrl = URL.createObjectURL(pdf)
+	const fileInfoPDF = {
+		filename: fileInfo.filename,
+		source: pdfBlobUrl,
+		basename: fileInfo.basename,
+		mime: PDF_MIME_TYPE,
+		etag: 'fixme',
+		hasPreview: false,
+		fileid: fileInfo.fileid,
+	}
+
+	// openWith replaces the callbacks of whoever opened the viewer, like the Files app
+	const viewer = getViewer()
+	const previousOnClose = viewer.onClose
+	viewer.openWith('pdf', {
+		fileInfo: fileInfoPDF,
+		list: [fileInfoPDF],
+		onClose() {
+			URL.revokeObjectURL(pdfBlobUrl)
+			previousOnClose()
 		},
-
-		showPdf(fileInfo, pdf) {
-			const pdfBlobUrl = URL.createObjectURL(pdf)
-			const fileInfoPDF = {
-				filename: fileInfo.filename,
-				source: pdfBlobUrl,
-				basename: fileInfo.basename,
-				mime: PDF_MIME_TYPE,
-				etag: 'fixme',
-				hasPreview: false,
-				fileid: fileInfo.fileid,
-			}
-
-			// openWith replaces the callbacks of whoever opened the viewer, like the Files app
-			const previousOnClose = OCA.Viewer.onClose
-			OCA.Viewer.openWith('pdf', {
-				fileInfo: fileInfoPDF,
-				list: [fileInfoPDF],
-				onClose() {
-					URL.revokeObjectURL(pdfBlobUrl)
-					previousOnClose()
-				},
-			})
-		},
-	},
+	})
 }
 </script>

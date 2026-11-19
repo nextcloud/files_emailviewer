@@ -6,4 +6,4 @@
 
 ?>
 <!DOCTYPE html>
-<script nonce="<?php p($_['nonce']) ?>" src="<?php p($_['scriptUrl']) ?>"></script>
+<script type="module" nonce="<?php p($_['nonce']) ?>" src="<?php p($_['scriptUrl']) ?>"></script>

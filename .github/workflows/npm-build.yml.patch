@@ -1,0 +1,10 @@
+--- a/.github/workflows/npm-build.yml
++++ b/.github/workflows/npm-build.yml
+@@ -42,6 +42,7 @@
+               - 'tsconfig.json'
+               - '**.js'
+               - '**.ts'
++              - '**.mts'
+               - '**.vue'
+ 
+   build:

@@ -58,7 +58,7 @@ class PageControllerTest extends TestCase {
 		$this->assertEquals(TemplateResponse::RENDER_AS_BLANK, $response->getRenderAs());
 		$this->assertEquals('nonce-of-nextcloud', $response->getParams()['nonce']);
 		$this->assertEquals(
-			'/apps/files_emailviewer/js/files_emailviewer-render-frame.js?v=1.2.3',
+			'/apps/files_emailviewer/js/files_emailviewer-render-frame.mjs?v=1.2.3',
 			$response->getParams()['scriptUrl'],
 		);
 	}

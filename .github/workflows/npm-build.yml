@@ -42,6 +42,7 @@ jobs:
               - 'tsconfig.json'
               - '**.js'
               - '**.ts'
+              - '**.mts'
               - '**.vue'
 
   build:

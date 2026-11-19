@@ -3,11 +3,11 @@
  * SPDX-License-Identifier: AGPL-3.0-or-later
  */
 
-import { getDocument, GlobalWorkerOptions } from 'pdfjs-dist'
-import { convertMailToPdf } from '../../../../src/util/convert.ts'
+/// <reference types="vite/client" />
 
-/** the package pdfjs-dist, as served by the development server */
-const PDFJS_URL = '/pdfjs-dist'
+import { getDocument, GlobalWorkerOptions } from 'pdfjs-dist'
+import pdfWorkerUrl from 'pdfjs-dist/build/pdf.worker.min.mjs?url'
+import { convertMailToPdf } from '../../../../src/util/convert.ts'
 
 /** pixels per point of the PDF, for the images of the pages */
 const PAGE_SCALE = 1
@@ -18,7 +18,7 @@ const PAGE_GAP = 8
 /** color between the pages in the image, distinct from white page backgrounds */
 const PAGE_GAP_COLOR = '#808080'
 
-GlobalWorkerOptions.workerSrc = `${PDFJS_URL}/build/pdf.worker.min.mjs`
+GlobalWorkerOptions.workerSrc = pdfWorkerUrl
 
 /** result of extracting and rendering, as strings, as it is passed to Node.js */
 export interface RenderResult {
@@ -69,7 +69,6 @@ async function inspectPdf(pdf: Blob): Promise<{ image: string, text: string }> {
 	const loadingTask = getDocument({
 		// not `pdf.arrayBuffer()`, as its promise belongs to the removed render frame and never settles
 		data: new Uint8Array(await new Response(pdf).arrayBuffer()),
-		standardFontDataUrl: `${PDFJS_URL}/standard_fonts/`,
 	})
 	try {
 		const pdfDocument = await loadingTask.promise

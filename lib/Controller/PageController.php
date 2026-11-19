@@ -61,7 +61,7 @@ class PageController extends Controller {
 
 		$policy->addAllowedFrameAncestorDomain("'self'");
 
-		$scriptUrl = $this->urlGenerator->linkTo(Application::APP_ID, 'js/files_emailviewer-render-frame.js', [
+		$scriptUrl = $this->urlGenerator->linkTo(Application::APP_ID, 'js/files_emailviewer-render-frame.mjs', [
 			// a new URL for each version of the app, so that browsers do not use the script of an old version
 			'v' => $this->appManager->getAppVersion(Application::APP_ID),
 		]);

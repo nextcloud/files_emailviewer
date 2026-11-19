@@ -1,6 +1,6 @@
 --- a/.github/workflows/node-test.yml
 +++ b/.github/workflows/node-test.yml
-@@ -44,6 +44,8 @@
+@@ -44,12 +44,15 @@
                - '__tests__/**'
                - '__mocks__/**'
                - 'src/**'
@@ -9,7 +9,14 @@
                - 'appinfo/info.xml'
                - 'package.json'
                - 'package-lock.json'
-@@ -77,14 +79,28 @@
+               - 'tsconfig.json'
+               - '**.js'
+               - '**.ts'
++              - '**.mts'
+               - '**.vue'
+ 
+   test:
+@@ -77,14 +80,28 @@
          run: npm i -g 'npm@${{ steps.versions.outputs.package-manager-version }}'
  
        - name: Install dependencies & build
